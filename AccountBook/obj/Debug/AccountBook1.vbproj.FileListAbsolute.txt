@@ -1,0 +1,11 @@
+c:\users\soichiro\documents\visual studio 2015\Projects\AccountBook1\AccountBook1\bin\Debug\AccountBook1.exe.config
+c:\users\soichiro\documents\visual studio 2015\Projects\AccountBook1\AccountBook1\obj\Debug\AccountBook1.vbprojResolveAssemblyReference.cache
+c:\users\soichiro\documents\visual studio 2015\Projects\AccountBook1\AccountBook1\obj\Debug\AccountBook1.EntryFm.resources
+c:\users\soichiro\documents\visual studio 2015\Projects\AccountBook1\AccountBook1\obj\Debug\AccountBook1.Resources.resources
+c:\users\soichiro\documents\visual studio 2015\Projects\AccountBook1\AccountBook1\obj\Debug\AccountBook1.vbproj.GenerateResource.Cache
+c:\users\soichiro\documents\visual studio 2015\Projects\AccountBook1\AccountBook1\obj\Debug\AccountBook1.xml
+c:\users\soichiro\documents\visual studio 2015\Projects\AccountBook1\AccountBook1\bin\Debug\AccountBook1.exe
+c:\users\soichiro\documents\visual studio 2015\Projects\AccountBook1\AccountBook1\bin\Debug\AccountBook1.pdb
+c:\users\soichiro\documents\visual studio 2015\Projects\AccountBook1\AccountBook1\bin\Debug\AccountBook1.xml
+c:\users\soichiro\documents\visual studio 2015\Projects\AccountBook1\AccountBook1\obj\Debug\AccountBook1.exe
+c:\users\soichiro\documents\visual studio 2015\Projects\AccountBook1\AccountBook1\obj\Debug\AccountBook1.pdb
