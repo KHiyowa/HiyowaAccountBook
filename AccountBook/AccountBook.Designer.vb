@@ -22,12 +22,8 @@ Partial Class AccountBook
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.CommandBarMs = New System.Windows.Forms.MenuStrip()
-        Me.AccountDgv = New System.Windows.Forms.DataGridView()
-        Me.QuitBtn = New System.Windows.Forms.Button()
-        Me.AddBtn = New System.Windows.Forms.Button()
-        Me.ChangeBtn = New System.Windows.Forms.Button()
-        Me.DeleteBtn = New System.Windows.Forms.Button()
         Me.FileTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.QuitTsmi = New System.Windows.Forms.ToolStripMenuItem()
@@ -40,8 +36,24 @@ Partial Class AccountBook
         Me.CountingTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.VersionInfoTsmi = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AccountDgv = New System.Windows.Forms.DataGridView()
+        Me.QuitBtn = New System.Windows.Forms.Button()
+        Me.AddBtn = New System.Windows.Forms.Button()
+        Me.ChangeBtn = New System.Windows.Forms.Button()
+        Me.DeleteBtn = New System.Windows.Forms.Button()
+        Me.MoneyDataSet = New AccountBook1.MoneyDataSet()
+        Me.MoneyDataTableBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.日付DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.分類DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.品名DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.金額DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.備考DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CategoryDataSet1 = New AccountBook1.CategoryDataSet()
         Me.CommandBarMs.SuspendLayout()
         CType(Me.AccountDgv, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.MoneyDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.MoneyDataTableBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CategoryDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'CommandBarMs
@@ -49,106 +61,61 @@ Partial Class AccountBook
         Me.CommandBarMs.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileTsmi, Me.EditTsmi, Me.ViewTsmi, Me.HelpTsmi})
         Me.CommandBarMs.Location = New System.Drawing.Point(0, 0)
         Me.CommandBarMs.Name = "CommandBarMs"
-        Me.CommandBarMs.Size = New System.Drawing.Size(498, 26)
+        Me.CommandBarMs.Size = New System.Drawing.Size(498, 24)
         Me.CommandBarMs.TabIndex = 0
         Me.CommandBarMs.Text = "MenuStrip1"
-        '
-        'AccountDgv
-        '
-        Me.AccountDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.AccountDgv.Location = New System.Drawing.Point(12, 27)
-        Me.AccountDgv.Name = "AccountDgv"
-        Me.AccountDgv.RowTemplate.Height = 21
-        Me.AccountDgv.Size = New System.Drawing.Size(474, 285)
-        Me.AccountDgv.TabIndex = 1
-        '
-        'QuitBtn
-        '
-        Me.QuitBtn.Location = New System.Drawing.Point(12, 318)
-        Me.QuitBtn.Name = "QuitBtn"
-        Me.QuitBtn.Size = New System.Drawing.Size(75, 23)
-        Me.QuitBtn.TabIndex = 2
-        Me.QuitBtn.Text = "終了"
-        Me.QuitBtn.UseVisualStyleBackColor = True
-        '
-        'AddBtn
-        '
-        Me.AddBtn.Location = New System.Drawing.Point(249, 318)
-        Me.AddBtn.Name = "AddBtn"
-        Me.AddBtn.Size = New System.Drawing.Size(75, 23)
-        Me.AddBtn.TabIndex = 3
-        Me.AddBtn.Text = "追加"
-        Me.AddBtn.UseVisualStyleBackColor = True
-        '
-        'ChangeBtn
-        '
-        Me.ChangeBtn.Location = New System.Drawing.Point(330, 318)
-        Me.ChangeBtn.Name = "ChangeBtn"
-        Me.ChangeBtn.Size = New System.Drawing.Size(75, 23)
-        Me.ChangeBtn.TabIndex = 4
-        Me.ChangeBtn.Text = "変更"
-        Me.ChangeBtn.UseVisualStyleBackColor = True
-        '
-        'DeleteBtn
-        '
-        Me.DeleteBtn.Location = New System.Drawing.Point(411, 318)
-        Me.DeleteBtn.Name = "DeleteBtn"
-        Me.DeleteBtn.Size = New System.Drawing.Size(75, 23)
-        Me.DeleteBtn.TabIndex = 5
-        Me.DeleteBtn.Text = "削除"
-        Me.DeleteBtn.UseVisualStyleBackColor = True
         '
         'FileTsmi
         '
         Me.FileTsmi.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveTsmi, Me.QuitTsmi})
         Me.FileTsmi.Name = "FileTsmi"
-        Me.FileTsmi.Size = New System.Drawing.Size(85, 22)
+        Me.FileTsmi.Size = New System.Drawing.Size(70, 20)
         Me.FileTsmi.Text = "ファイル(&F)"
         '
         'SaveTsmi
         '
         Me.SaveTsmi.Name = "SaveTsmi"
         Me.SaveTsmi.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.SaveTsmi.Size = New System.Drawing.Size(165, 22)
+        Me.SaveTsmi.Size = New System.Drawing.Size(162, 22)
         Me.SaveTsmi.Text = "保存(&S)"
         '
         'QuitTsmi
         '
         Me.QuitTsmi.Name = "QuitTsmi"
-        Me.QuitTsmi.Size = New System.Drawing.Size(165, 22)
+        Me.QuitTsmi.Size = New System.Drawing.Size(162, 22)
         Me.QuitTsmi.Text = "終了(&Q)"
         '
         'EditTsmi
         '
         Me.EditTsmi.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddTsmi, Me.ChangeTsmi, Me.DeleteTsmi})
         Me.EditTsmi.Name = "EditTsmi"
-        Me.EditTsmi.Size = New System.Drawing.Size(61, 22)
+        Me.EditTsmi.Size = New System.Drawing.Size(60, 20)
         Me.EditTsmi.Text = "編集(&E)"
         '
         'AddTsmi
         '
         Me.AddTsmi.Name = "AddTsmi"
         Me.AddTsmi.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.AddTsmi.Size = New System.Drawing.Size(166, 22)
+        Me.AddTsmi.Size = New System.Drawing.Size(163, 22)
         Me.AddTsmi.Text = "追加(&A)"
         '
         'ChangeTsmi
         '
         Me.ChangeTsmi.Name = "ChangeTsmi"
-        Me.ChangeTsmi.Size = New System.Drawing.Size(166, 22)
+        Me.ChangeTsmi.Size = New System.Drawing.Size(163, 22)
         Me.ChangeTsmi.Text = "変更(&C)"
         '
         'DeleteTsmi
         '
         Me.DeleteTsmi.Name = "DeleteTsmi"
-        Me.DeleteTsmi.Size = New System.Drawing.Size(166, 22)
+        Me.DeleteTsmi.Size = New System.Drawing.Size(163, 22)
         Me.DeleteTsmi.Text = "削除(&D)"
         '
         'ViewTsmi
         '
         Me.ViewTsmi.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ListTsmi, Me.CountingTsmi})
         Me.ViewTsmi.Name = "ViewTsmi"
-        Me.ViewTsmi.Size = New System.Drawing.Size(62, 22)
+        Me.ViewTsmi.Size = New System.Drawing.Size(61, 20)
         Me.ViewTsmi.Text = "表示(&V)"
         '
         'ListTsmi
@@ -167,14 +134,107 @@ Partial Class AccountBook
         '
         Me.HelpTsmi.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.VersionInfoTsmi})
         Me.HelpTsmi.Name = "HelpTsmi"
-        Me.HelpTsmi.Size = New System.Drawing.Size(75, 22)
+        Me.HelpTsmi.Size = New System.Drawing.Size(67, 20)
         Me.HelpTsmi.Text = "ヘルプ(&H)"
         '
         'VersionInfoTsmi
         '
         Me.VersionInfoTsmi.Name = "VersionInfoTsmi"
-        Me.VersionInfoTsmi.Size = New System.Drawing.Size(178, 22)
+        Me.VersionInfoTsmi.Size = New System.Drawing.Size(161, 22)
         Me.VersionInfoTsmi.Text = "バージョン情報(&V)"
+        '
+        'AccountDgv
+        '
+        Me.AccountDgv.AutoGenerateColumns = False
+        Me.AccountDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.AccountDgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.日付DataGridViewTextBoxColumn, Me.分類DataGridViewTextBoxColumn, Me.品名DataGridViewTextBoxColumn, Me.金額DataGridViewTextBoxColumn, Me.備考DataGridViewTextBoxColumn})
+        Me.AccountDgv.DataSource = Me.MoneyDataTableBindingSource
+        Me.AccountDgv.Location = New System.Drawing.Point(12, 27)
+        Me.AccountDgv.Name = "AccountDgv"
+        Me.AccountDgv.RowTemplate.Height = 21
+        Me.AccountDgv.Size = New System.Drawing.Size(474, 285)
+        Me.AccountDgv.TabIndex = 1
+        '
+        'QuitBtn
+        '
+        Me.QuitBtn.Location = New System.Drawing.Point(411, 318)
+        Me.QuitBtn.Name = "QuitBtn"
+        Me.QuitBtn.Size = New System.Drawing.Size(75, 23)
+        Me.QuitBtn.TabIndex = 2
+        Me.QuitBtn.Text = "終了"
+        Me.QuitBtn.UseVisualStyleBackColor = True
+        '
+        'AddBtn
+        '
+        Me.AddBtn.Location = New System.Drawing.Point(12, 318)
+        Me.AddBtn.Name = "AddBtn"
+        Me.AddBtn.Size = New System.Drawing.Size(75, 23)
+        Me.AddBtn.TabIndex = 3
+        Me.AddBtn.Text = "追加"
+        Me.AddBtn.UseVisualStyleBackColor = True
+        '
+        'ChangeBtn
+        '
+        Me.ChangeBtn.Location = New System.Drawing.Point(93, 318)
+        Me.ChangeBtn.Name = "ChangeBtn"
+        Me.ChangeBtn.Size = New System.Drawing.Size(75, 23)
+        Me.ChangeBtn.TabIndex = 4
+        Me.ChangeBtn.Text = "変更"
+        Me.ChangeBtn.UseVisualStyleBackColor = True
+        '
+        'DeleteBtn
+        '
+        Me.DeleteBtn.Location = New System.Drawing.Point(174, 318)
+        Me.DeleteBtn.Name = "DeleteBtn"
+        Me.DeleteBtn.Size = New System.Drawing.Size(75, 23)
+        Me.DeleteBtn.TabIndex = 5
+        Me.DeleteBtn.Text = "削除"
+        Me.DeleteBtn.UseVisualStyleBackColor = True
+        '
+        'MoneyDataSet
+        '
+        Me.MoneyDataSet.DataSetName = "MoneyDataSet"
+        Me.MoneyDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'MoneyDataTableBindingSource
+        '
+        Me.MoneyDataTableBindingSource.DataMember = "MoneyDataTable"
+        Me.MoneyDataTableBindingSource.DataSource = Me.MoneyDataSet
+        '
+        '日付DataGridViewTextBoxColumn
+        '
+        Me.日付DataGridViewTextBoxColumn.DataPropertyName = "日付"
+        Me.日付DataGridViewTextBoxColumn.HeaderText = "日付"
+        Me.日付DataGridViewTextBoxColumn.Name = "日付DataGridViewTextBoxColumn"
+        '
+        '分類DataGridViewTextBoxColumn
+        '
+        Me.分類DataGridViewTextBoxColumn.DataPropertyName = "分類"
+        Me.分類DataGridViewTextBoxColumn.HeaderText = "分類"
+        Me.分類DataGridViewTextBoxColumn.Name = "分類DataGridViewTextBoxColumn"
+        '
+        '品名DataGridViewTextBoxColumn
+        '
+        Me.品名DataGridViewTextBoxColumn.DataPropertyName = "品名"
+        Me.品名DataGridViewTextBoxColumn.HeaderText = "品名"
+        Me.品名DataGridViewTextBoxColumn.Name = "品名DataGridViewTextBoxColumn"
+        '
+        '金額DataGridViewTextBoxColumn
+        '
+        Me.金額DataGridViewTextBoxColumn.DataPropertyName = "金額"
+        Me.金額DataGridViewTextBoxColumn.HeaderText = "金額"
+        Me.金額DataGridViewTextBoxColumn.Name = "金額DataGridViewTextBoxColumn"
+        '
+        '備考DataGridViewTextBoxColumn
+        '
+        Me.備考DataGridViewTextBoxColumn.DataPropertyName = "備考"
+        Me.備考DataGridViewTextBoxColumn.HeaderText = "備考"
+        Me.備考DataGridViewTextBoxColumn.Name = "備考DataGridViewTextBoxColumn"
+        '
+        'CategoryDataSet1
+        '
+        Me.CategoryDataSet1.DataSetName = "CategoryDataSet"
+        Me.CategoryDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'AccountBook
         '
@@ -193,6 +253,9 @@ Partial Class AccountBook
         Me.CommandBarMs.ResumeLayout(False)
         Me.CommandBarMs.PerformLayout()
         CType(Me.AccountDgv, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.MoneyDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.MoneyDataTableBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CategoryDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -216,4 +279,12 @@ Partial Class AccountBook
     Friend WithEvents CountingTsmi As ToolStripMenuItem
     Friend WithEvents HelpTsmi As ToolStripMenuItem
     Friend WithEvents VersionInfoTsmi As ToolStripMenuItem
+    Friend WithEvents 日付DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents 分類DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents 品名DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents 金額DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents 備考DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents MoneyDataTableBindingSource As BindingSource
+    Friend WithEvents MoneyDataSet As MoneyDataSet
+    Friend WithEvents CategoryDataSet1 As CategoryDataSet
 End Class

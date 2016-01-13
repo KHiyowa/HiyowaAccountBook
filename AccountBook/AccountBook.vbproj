@@ -51,6 +51,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -78,12 +79,22 @@
     <Compile Include="AccountBook.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CategoryDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CategoryDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="EntryFm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="EntryFm.Designer.vb">
       <DependentUpon>EntryFm.vb</DependentUpon>
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MoneyDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MoneyDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -116,6 +127,28 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="CategoryDataSet.xsc">
+      <DependentUpon>CategoryDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="CategoryDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CategoryDataSet.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="CategoryDataSet.xss">
+      <DependentUpon>CategoryDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MoneyDataSet.xsc">
+      <DependentUpon>MoneyDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MoneyDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MoneyDataSet.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="MoneyDataSet.xss">
+      <DependentUpon>MoneyDataSet.xsd</DependentUpon>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

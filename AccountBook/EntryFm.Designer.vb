@@ -22,18 +22,22 @@ Partial Class EntryFm
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.MonCalendar = New System.Windows.Forms.MonthCalendar()
         Me.EntryBtn = New System.Windows.Forms.Button()
         Me.CancelBtn = New System.Windows.Forms.Button()
         Me.GroupingCb = New System.Windows.Forms.ComboBox()
+        Me.CategoryDataTableBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.CategoryDataSet = New AccountBook1.CategoryDataSet()
         Me.GroupingLb = New System.Windows.Forms.Label()
         Me.ArticleLb = New System.Windows.Forms.Label()
         Me.ArticleTb = New System.Windows.Forms.TextBox()
         Me.CostTb = New System.Windows.Forms.TextBox()
-        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.CostLb = New System.Windows.Forms.Label()
         Me.NoteLb = New System.Windows.Forms.Label()
         Me.NoteTb = New System.Windows.Forms.TextBox()
+        CType(Me.CategoryDataTableBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CategoryDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MonCalendar
@@ -44,7 +48,8 @@ Partial Class EntryFm
         '
         'EntryBtn
         '
-        Me.EntryBtn.Location = New System.Drawing.Point(382, 157)
+        Me.EntryBtn.DialogResult = System.Windows.Forms.DialogResult.OK
+        Me.EntryBtn.Location = New System.Drawing.Point(301, 157)
         Me.EntryBtn.Name = "EntryBtn"
         Me.EntryBtn.Size = New System.Drawing.Size(75, 23)
         Me.EntryBtn.TabIndex = 5
@@ -54,7 +59,7 @@ Partial Class EntryFm
         'CancelBtn
         '
         Me.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.CancelBtn.Location = New System.Drawing.Point(301, 157)
+        Me.CancelBtn.Location = New System.Drawing.Point(382, 157)
         Me.CancelBtn.Name = "CancelBtn"
         Me.CancelBtn.Size = New System.Drawing.Size(75, 23)
         Me.CancelBtn.TabIndex = 6
@@ -63,11 +68,23 @@ Partial Class EntryFm
         '
         'GroupingCb
         '
+        Me.GroupingCb.DataSource = Me.CategoryDataTableBindingSource
+        Me.GroupingCb.DisplayMember = "分類"
         Me.GroupingCb.FormattingEnabled = True
         Me.GroupingCb.Location = New System.Drawing.Point(301, 18)
         Me.GroupingCb.Name = "GroupingCb"
         Me.GroupingCb.Size = New System.Drawing.Size(156, 20)
         Me.GroupingCb.TabIndex = 1
+        '
+        'CategoryDataTableBindingSource
+        '
+        Me.CategoryDataTableBindingSource.DataMember = "CategoryDataTable"
+        Me.CategoryDataTableBindingSource.DataSource = Me.CategoryDataSet
+        '
+        'CategoryDataSet
+        '
+        Me.CategoryDataSet.DataSetName = "CategoryDataSet"
+        Me.CategoryDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'GroupingLb
         '
@@ -146,6 +163,8 @@ Partial Class EntryFm
         Me.Controls.Add(Me.MonCalendar)
         Me.Name = "EntryFm"
         Me.Text = "登録"
+        CType(Me.CategoryDataTableBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CategoryDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -159,8 +178,9 @@ Partial Class EntryFm
     Friend WithEvents ArticleLb As Label
     Friend WithEvents ArticleTb As TextBox
     Friend WithEvents CostTb As TextBox
-    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
     Friend WithEvents CostLb As Label
     Friend WithEvents NoteLb As Label
     Friend WithEvents NoteTb As TextBox
+    Friend WithEvents CategoryDataTableBindingSource As BindingSource
+    Friend WithEvents CategoryDataSet As CategoryDataSet
 End Class
