@@ -26,16 +26,16 @@ Partial Class EntryFm
         Me.MonCalendar = New System.Windows.Forms.MonthCalendar()
         Me.EntryBtn = New System.Windows.Forms.Button()
         Me.CancelBtn = New System.Windows.Forms.Button()
-        Me.GroupingCb = New System.Windows.Forms.ComboBox()
+        Me.CmbCategory = New System.Windows.Forms.ComboBox()
         Me.CategoryDataTableBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.CategoryDataSet = New AccountBook1.CategoryDataSet()
-        Me.GroupingLb = New System.Windows.Forms.Label()
-        Me.ArticleLb = New System.Windows.Forms.Label()
-        Me.ArticleTb = New System.Windows.Forms.TextBox()
-        Me.CostTb = New System.Windows.Forms.TextBox()
-        Me.CostLb = New System.Windows.Forms.Label()
-        Me.NoteLb = New System.Windows.Forms.Label()
-        Me.NoteTb = New System.Windows.Forms.TextBox()
+        Me.LblCategory = New System.Windows.Forms.Label()
+        Me.LblItem = New System.Windows.Forms.Label()
+        Me.TxtItem = New System.Windows.Forms.TextBox()
+        Me.MTxtMoney = New System.Windows.Forms.TextBox()
+        Me.LblMoney = New System.Windows.Forms.Label()
+        Me.LblRemarks = New System.Windows.Forms.Label()
+        Me.TxtRemarks = New System.Windows.Forms.TextBox()
         CType(Me.CategoryDataTableBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CategoryDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -66,15 +66,15 @@ Partial Class EntryFm
         Me.CancelBtn.Text = "キャンセル"
         Me.CancelBtn.UseVisualStyleBackColor = True
         '
-        'GroupingCb
+        'CmbCategory
         '
-        Me.GroupingCb.DataSource = Me.CategoryDataTableBindingSource
-        Me.GroupingCb.DisplayMember = "分類"
-        Me.GroupingCb.FormattingEnabled = True
-        Me.GroupingCb.Location = New System.Drawing.Point(301, 18)
-        Me.GroupingCb.Name = "GroupingCb"
-        Me.GroupingCb.Size = New System.Drawing.Size(156, 20)
-        Me.GroupingCb.TabIndex = 1
+        Me.CmbCategory.DataSource = Me.CategoryDataTableBindingSource
+        Me.CmbCategory.DisplayMember = "分類"
+        Me.CmbCategory.FormattingEnabled = True
+        Me.CmbCategory.Location = New System.Drawing.Point(301, 18)
+        Me.CmbCategory.Name = "CmbCategory"
+        Me.CmbCategory.Size = New System.Drawing.Size(156, 20)
+        Me.CmbCategory.TabIndex = 1
         '
         'CategoryDataTableBindingSource
         '
@@ -86,62 +86,62 @@ Partial Class EntryFm
         Me.CategoryDataSet.DataSetName = "CategoryDataSet"
         Me.CategoryDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
-        'GroupingLb
+        'LblCategory
         '
-        Me.GroupingLb.AutoSize = True
-        Me.GroupingLb.Location = New System.Drawing.Point(250, 21)
-        Me.GroupingLb.Name = "GroupingLb"
-        Me.GroupingLb.Size = New System.Drawing.Size(29, 12)
-        Me.GroupingLb.TabIndex = 4
-        Me.GroupingLb.Text = "分類"
+        Me.LblCategory.AutoSize = True
+        Me.LblCategory.Location = New System.Drawing.Point(250, 21)
+        Me.LblCategory.Name = "LblCategory"
+        Me.LblCategory.Size = New System.Drawing.Size(29, 12)
+        Me.LblCategory.TabIndex = 4
+        Me.LblCategory.Text = "分類"
         '
-        'ArticleLb
+        'LblItem
         '
-        Me.ArticleLb.AutoSize = True
-        Me.ArticleLb.Location = New System.Drawing.Point(250, 48)
-        Me.ArticleLb.Name = "ArticleLb"
-        Me.ArticleLb.Size = New System.Drawing.Size(29, 12)
-        Me.ArticleLb.TabIndex = 5
-        Me.ArticleLb.Text = "品名"
+        Me.LblItem.AutoSize = True
+        Me.LblItem.Location = New System.Drawing.Point(250, 48)
+        Me.LblItem.Name = "LblItem"
+        Me.LblItem.Size = New System.Drawing.Size(29, 12)
+        Me.LblItem.TabIndex = 5
+        Me.LblItem.Text = "品名"
         '
-        'ArticleTb
+        'TxtItem
         '
-        Me.ArticleTb.Location = New System.Drawing.Point(301, 45)
-        Me.ArticleTb.Name = "ArticleTb"
-        Me.ArticleTb.Size = New System.Drawing.Size(156, 19)
-        Me.ArticleTb.TabIndex = 2
+        Me.TxtItem.Location = New System.Drawing.Point(301, 45)
+        Me.TxtItem.Name = "TxtItem"
+        Me.TxtItem.Size = New System.Drawing.Size(156, 19)
+        Me.TxtItem.TabIndex = 2
         '
-        'CostTb
+        'MTxtMoney
         '
-        Me.CostTb.Location = New System.Drawing.Point(301, 71)
-        Me.CostTb.Name = "CostTb"
-        Me.CostTb.Size = New System.Drawing.Size(156, 19)
-        Me.CostTb.TabIndex = 3
+        Me.MTxtMoney.Location = New System.Drawing.Point(301, 71)
+        Me.MTxtMoney.Name = "MTxtMoney"
+        Me.MTxtMoney.Size = New System.Drawing.Size(156, 19)
+        Me.MTxtMoney.TabIndex = 3
         '
-        'CostLb
+        'LblMoney
         '
-        Me.CostLb.AutoSize = True
-        Me.CostLb.Location = New System.Drawing.Point(250, 74)
-        Me.CostLb.Name = "CostLb"
-        Me.CostLb.Size = New System.Drawing.Size(29, 12)
-        Me.CostLb.TabIndex = 8
-        Me.CostLb.Text = "金額"
+        Me.LblMoney.AutoSize = True
+        Me.LblMoney.Location = New System.Drawing.Point(250, 74)
+        Me.LblMoney.Name = "LblMoney"
+        Me.LblMoney.Size = New System.Drawing.Size(29, 12)
+        Me.LblMoney.TabIndex = 8
+        Me.LblMoney.Text = "金額"
         '
-        'NoteLb
+        'LblRemarks
         '
-        Me.NoteLb.AutoSize = True
-        Me.NoteLb.Location = New System.Drawing.Point(250, 100)
-        Me.NoteLb.Name = "NoteLb"
-        Me.NoteLb.Size = New System.Drawing.Size(29, 12)
-        Me.NoteLb.TabIndex = 9
-        Me.NoteLb.Text = "備考"
+        Me.LblRemarks.AutoSize = True
+        Me.LblRemarks.Location = New System.Drawing.Point(250, 100)
+        Me.LblRemarks.Name = "LblRemarks"
+        Me.LblRemarks.Size = New System.Drawing.Size(29, 12)
+        Me.LblRemarks.TabIndex = 9
+        Me.LblRemarks.Text = "備考"
         '
-        'NoteTb
+        'TxtRemarks
         '
-        Me.NoteTb.Location = New System.Drawing.Point(301, 97)
-        Me.NoteTb.Name = "NoteTb"
-        Me.NoteTb.Size = New System.Drawing.Size(156, 19)
-        Me.NoteTb.TabIndex = 4
+        Me.TxtRemarks.Location = New System.Drawing.Point(301, 97)
+        Me.TxtRemarks.Name = "TxtRemarks"
+        Me.TxtRemarks.Size = New System.Drawing.Size(156, 19)
+        Me.TxtRemarks.TabIndex = 4
         '
         'EntryFm
         '
@@ -150,14 +150,14 @@ Partial Class EntryFm
         Me.CancelButton = Me.CancelBtn
         Me.ClientSize = New System.Drawing.Size(469, 202)
         Me.ControlBox = False
-        Me.Controls.Add(Me.NoteTb)
-        Me.Controls.Add(Me.NoteLb)
-        Me.Controls.Add(Me.CostLb)
-        Me.Controls.Add(Me.CostTb)
-        Me.Controls.Add(Me.ArticleTb)
-        Me.Controls.Add(Me.ArticleLb)
-        Me.Controls.Add(Me.GroupingLb)
-        Me.Controls.Add(Me.GroupingCb)
+        Me.Controls.Add(Me.TxtRemarks)
+        Me.Controls.Add(Me.LblRemarks)
+        Me.Controls.Add(Me.LblMoney)
+        Me.Controls.Add(Me.MTxtMoney)
+        Me.Controls.Add(Me.TxtItem)
+        Me.Controls.Add(Me.LblItem)
+        Me.Controls.Add(Me.LblCategory)
+        Me.Controls.Add(Me.CmbCategory)
         Me.Controls.Add(Me.CancelBtn)
         Me.Controls.Add(Me.EntryBtn)
         Me.Controls.Add(Me.MonCalendar)
@@ -173,14 +173,14 @@ Partial Class EntryFm
     Friend WithEvents MonCalendar As MonthCalendar
     Friend WithEvents EntryBtn As Button
     Friend WithEvents CancelBtn As Button
-    Friend WithEvents GroupingCb As ComboBox
-    Friend WithEvents GroupingLb As Label
-    Friend WithEvents ArticleLb As Label
-    Friend WithEvents ArticleTb As TextBox
-    Friend WithEvents CostTb As TextBox
-    Friend WithEvents CostLb As Label
-    Friend WithEvents NoteLb As Label
-    Friend WithEvents NoteTb As TextBox
+    Friend WithEvents CmbCategory As ComboBox
+    Friend WithEvents LblCategory As Label
+    Friend WithEvents LblItem As Label
+    Friend WithEvents TxtItem As TextBox
+    Friend WithEvents MTxtMoney As TextBox
+    Friend WithEvents LblMoney As Label
+    Friend WithEvents LblRemarks As Label
+    Friend WithEvents TxtRemarks As TextBox
     Friend WithEvents CategoryDataTableBindingSource As BindingSource
     Friend WithEvents CategoryDataSet As CategoryDataSet
 End Class

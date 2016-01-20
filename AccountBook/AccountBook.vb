@@ -20,11 +20,64 @@ Public Class AccountBook
         If DrRet = DialogResult.OK Then
             MoneyDataSet.MoneyDataTable.AddMoneyDataTableRow(
             FrmEntry.MonCalendar.SelectionRange.Start,
-            FrmEntry.GroupingCb.Text,
-            FrmEntry.ArticleTb.Text,
-            Integer.Parse(FrmEntry.CostTb.Text),
-            FrmEntry.NoteTb.Text)
+            FrmEntry.CmbCategory.Text,
+            FrmEntry.TxtItem.Text,
+            Integer.Parse(FrmEntry.MTxtMoney.Text),
+            FrmEntry.TxtRemarks.Text)
         End If
+    End Sub
+#End Region
+
+#Region "変更"
+    Private Sub ChangeBtn_Click(sender As Object, e As EventArgs) Handles ChangeBtn.Click
+        UpdateData()
+    End Sub
+
+    Private Sub ChangeTsmi_Click(sender As Object, e As EventArgs) Handles ChangeTsmi.Click
+        UpdateData()
+    End Sub
+
+    Private Sub UpdateData()
+        Dim NowRow As Integer = AccountDgv.CurrentRow.Index
+        Dim OldDate As DateTime = DateTime.Parse(AccountDgv.Rows(NowRow).Cells(0).Value.ToString())
+        Dim OldCategory As String = AccountDgv.Rows(NowRow).Cells(1).Value.ToString()
+        Dim OldItem As String = AccountDgv.Rows(NowRow).Cells(2).Value.ToString()
+        Dim OldMoney As Integer = Integer.Parse(AccountDgv.Rows(NowRow).Cells(3).Value.ToString())
+        Dim OldRemarks As String = AccountDgv.Rows(NowRow).Cells(4).Value.ToString()
+
+        Dim FrmEntry As EntryFm = New EntryFm(CategoryDataSet1,
+                                            OldDate,
+                                            OldCategory,
+                                            OldItem,
+                                            OldMoney,
+                                            OldRemarks)
+
+        Dim DrRet = FrmEntry.ShowDialog()
+
+        If DrRet = DialogResult.OK Then
+            AccountDgv.Rows(NowRow).Cells(0).Value =
+                FrmEntry.MonCalendar.SelectionRange.Start
+            AccountDgv.Rows(NowRow).Cells(1).Value = FrmEntry.CmbCategory.Text
+            AccountDgv.Rows(NowRow).Cells(2).Value = FrmEntry.TxtItem.Text
+            AccountDgv.Rows(NowRow).Cells(3).Value = Integer.Parse(FrmEntry.MTxtMoney.Text)
+            AccountDgv.Rows(NowRow).Cells(4).Value = FrmEntry.TxtRemarks.Text
+        End If
+
+    End Sub
+#End Region
+
+#Region "削除"
+    Private Sub DeleteBtn_Click(sender As Object, e As EventArgs) Handles DeleteBtn.Click
+        DeleteData()
+    End Sub
+
+    Private Sub DeleteTsmi_Click(sender As Object, e As EventArgs) Handles DeleteTsmi.Click
+        DeleteData()
+    End Sub
+
+    Private Sub DeleteData()
+        Dim NowRow As Integer = AccountDgv.CurrentRow.Index
+        AccountDgv.Rows.RemoveAt(NowRow)
     End Sub
 #End Region
 
