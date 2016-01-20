@@ -37,22 +37,22 @@ Partial Class AccountBook
         Me.HelpTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.VersionInfoTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.AccountDgv = New System.Windows.Forms.DataGridView()
-        Me.QuitBtn = New System.Windows.Forms.Button()
-        Me.AddBtn = New System.Windows.Forms.Button()
-        Me.ChangeBtn = New System.Windows.Forms.Button()
-        Me.DeleteBtn = New System.Windows.Forms.Button()
-        Me.MoneyDataSet = New AccountBook1.MoneyDataSet()
-        Me.MoneyDataTableBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.日付DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.分類DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.品名DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.金額DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.備考DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MoneyDataTableBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.MoneyDataSet = New AccountBook1.MoneyDataSet()
+        Me.QuitBtn = New System.Windows.Forms.Button()
+        Me.AddBtn = New System.Windows.Forms.Button()
+        Me.ChangeBtn = New System.Windows.Forms.Button()
+        Me.DeleteBtn = New System.Windows.Forms.Button()
         Me.CategoryDataSet1 = New AccountBook1.CategoryDataSet()
         Me.CommandBarMs.SuspendLayout()
         CType(Me.AccountDgv, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.MoneyDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MoneyDataTableBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.MoneyDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CategoryDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -121,13 +121,13 @@ Partial Class AccountBook
         'ListTsmi
         '
         Me.ListTsmi.Name = "ListTsmi"
-        Me.ListTsmi.Size = New System.Drawing.Size(152, 22)
+        Me.ListTsmi.Size = New System.Drawing.Size(140, 22)
         Me.ListTsmi.Text = "一覧表示(&L)"
         '
         'CountingTsmi
         '
         Me.CountingTsmi.Name = "CountingTsmi"
-        Me.CountingTsmi.Size = New System.Drawing.Size(152, 22)
+        Me.CountingTsmi.Size = New System.Drawing.Size(140, 22)
         Me.CountingTsmi.Text = "集計表示(&C)"
         '
         'HelpTsmi
@@ -154,6 +154,46 @@ Partial Class AccountBook
         Me.AccountDgv.RowTemplate.Height = 21
         Me.AccountDgv.Size = New System.Drawing.Size(474, 285)
         Me.AccountDgv.TabIndex = 1
+        '
+        '日付DataGridViewTextBoxColumn
+        '
+        Me.日付DataGridViewTextBoxColumn.DataPropertyName = "日付"
+        Me.日付DataGridViewTextBoxColumn.HeaderText = "日付"
+        Me.日付DataGridViewTextBoxColumn.Name = "日付DataGridViewTextBoxColumn"
+        '
+        '分類DataGridViewTextBoxColumn
+        '
+        Me.分類DataGridViewTextBoxColumn.DataPropertyName = "分類"
+        Me.分類DataGridViewTextBoxColumn.HeaderText = "分類"
+        Me.分類DataGridViewTextBoxColumn.Name = "分類DataGridViewTextBoxColumn"
+        '
+        '品名DataGridViewTextBoxColumn
+        '
+        Me.品名DataGridViewTextBoxColumn.DataPropertyName = "品名"
+        Me.品名DataGridViewTextBoxColumn.HeaderText = "品名"
+        Me.品名DataGridViewTextBoxColumn.Name = "品名DataGridViewTextBoxColumn"
+        '
+        '金額DataGridViewTextBoxColumn
+        '
+        Me.金額DataGridViewTextBoxColumn.DataPropertyName = "金額"
+        Me.金額DataGridViewTextBoxColumn.HeaderText = "金額"
+        Me.金額DataGridViewTextBoxColumn.Name = "金額DataGridViewTextBoxColumn"
+        '
+        '備考DataGridViewTextBoxColumn
+        '
+        Me.備考DataGridViewTextBoxColumn.DataPropertyName = "備考"
+        Me.備考DataGridViewTextBoxColumn.HeaderText = "備考"
+        Me.備考DataGridViewTextBoxColumn.Name = "備考DataGridViewTextBoxColumn"
+        '
+        'MoneyDataTableBindingSource
+        '
+        Me.MoneyDataTableBindingSource.DataMember = "MoneyDataTable"
+        Me.MoneyDataTableBindingSource.DataSource = Me.MoneyDataSet
+        '
+        'MoneyDataSet
+        '
+        Me.MoneyDataSet.DataSetName = "MoneyDataSet"
+        Me.MoneyDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'QuitBtn
         '
@@ -191,46 +231,6 @@ Partial Class AccountBook
         Me.DeleteBtn.Text = "削除"
         Me.DeleteBtn.UseVisualStyleBackColor = True
         '
-        'MoneyDataSet
-        '
-        Me.MoneyDataSet.DataSetName = "MoneyDataSet"
-        Me.MoneyDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'MoneyDataTableBindingSource
-        '
-        Me.MoneyDataTableBindingSource.DataMember = "MoneyDataTable"
-        Me.MoneyDataTableBindingSource.DataSource = Me.MoneyDataSet
-        '
-        '日付DataGridViewTextBoxColumn
-        '
-        Me.日付DataGridViewTextBoxColumn.DataPropertyName = "日付"
-        Me.日付DataGridViewTextBoxColumn.HeaderText = "日付"
-        Me.日付DataGridViewTextBoxColumn.Name = "日付DataGridViewTextBoxColumn"
-        '
-        '分類DataGridViewTextBoxColumn
-        '
-        Me.分類DataGridViewTextBoxColumn.DataPropertyName = "分類"
-        Me.分類DataGridViewTextBoxColumn.HeaderText = "分類"
-        Me.分類DataGridViewTextBoxColumn.Name = "分類DataGridViewTextBoxColumn"
-        '
-        '品名DataGridViewTextBoxColumn
-        '
-        Me.品名DataGridViewTextBoxColumn.DataPropertyName = "品名"
-        Me.品名DataGridViewTextBoxColumn.HeaderText = "品名"
-        Me.品名DataGridViewTextBoxColumn.Name = "品名DataGridViewTextBoxColumn"
-        '
-        '金額DataGridViewTextBoxColumn
-        '
-        Me.金額DataGridViewTextBoxColumn.DataPropertyName = "金額"
-        Me.金額DataGridViewTextBoxColumn.HeaderText = "金額"
-        Me.金額DataGridViewTextBoxColumn.Name = "金額DataGridViewTextBoxColumn"
-        '
-        '備考DataGridViewTextBoxColumn
-        '
-        Me.備考DataGridViewTextBoxColumn.DataPropertyName = "備考"
-        Me.備考DataGridViewTextBoxColumn.HeaderText = "備考"
-        Me.備考DataGridViewTextBoxColumn.Name = "備考DataGridViewTextBoxColumn"
-        '
         'CategoryDataSet1
         '
         Me.CategoryDataSet1.DataSetName = "CategoryDataSet"
@@ -253,8 +253,8 @@ Partial Class AccountBook
         Me.CommandBarMs.ResumeLayout(False)
         Me.CommandBarMs.PerformLayout()
         CType(Me.AccountDgv, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.MoneyDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MoneyDataTableBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.MoneyDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CategoryDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

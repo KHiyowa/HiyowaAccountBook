@@ -658,11 +658,11 @@ Partial Public Class MoneyDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property 備考() As String
             Get
-                Try 
+                If Me.Is備考Null Then
+                    Return String.Empty
+                Else
                     Return CType(Me(Me.tableMoneyDataTable.備考Column),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("テーブル 'MoneyDataTable' にある列 '備考' の値は DBNull です。", e)
-                End Try
+                End If
             End Get
             Set
                 Me(Me.tableMoneyDataTable.備考Column) = value
