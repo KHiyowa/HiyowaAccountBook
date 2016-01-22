@@ -79,10 +79,25 @@
     <Compile Include="AccountBook.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="AddCategoryFm.Designer.vb">
+      <DependentUpon>AddCategoryFm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AddCategoryFm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CategoryDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CategoryDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="CategoryDataSet.vb">
+      <DependentUpon>CategoryDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="SettingFm.Designer.vb">
+      <DependentUpon>SettingFm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SettingFm.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="EntryFm.vb">
       <SubType>Form</SubType>
@@ -115,6 +130,12 @@
   <ItemGroup>
     <EmbeddedResource Include="AccountBook.resx">
       <DependentUpon>AccountBook.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddCategoryFm.resx">
+      <DependentUpon>AddCategoryFm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingFm.resx">
+      <DependentUpon>SettingFm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EntryFm.resx">
       <DependentUpon>EntryFm.vb</DependentUpon>

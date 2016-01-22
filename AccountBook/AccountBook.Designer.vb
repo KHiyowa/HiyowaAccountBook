@@ -26,11 +26,15 @@ Partial Class AccountBook
         Me.CommandBarMs = New System.Windows.Forms.MenuStrip()
         Me.FileTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveTsmi = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ForcedShutdownTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.QuitTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.AddTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.ChangeTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeleteTsmi = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EditTss1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SettingTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.CountingTsmi = New System.Windows.Forms.ToolStripMenuItem()
@@ -67,7 +71,7 @@ Partial Class AccountBook
         '
         'FileTsmi
         '
-        Me.FileTsmi.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveTsmi, Me.QuitTsmi})
+        Me.FileTsmi.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveTsmi, Me.ToolStripSeparator1, Me.ForcedShutdownTsmi, Me.QuitTsmi})
         Me.FileTsmi.Name = "FileTsmi"
         Me.FileTsmi.Size = New System.Drawing.Size(70, 20)
         Me.FileTsmi.Text = "ファイル(&F)"
@@ -76,18 +80,29 @@ Partial Class AccountBook
         '
         Me.SaveTsmi.Name = "SaveTsmi"
         Me.SaveTsmi.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.SaveTsmi.Size = New System.Drawing.Size(162, 22)
+        Me.SaveTsmi.Size = New System.Drawing.Size(214, 22)
         Me.SaveTsmi.Text = "保存(&S)"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(211, 6)
+        '
+        'ForcedShutdownTsmi
+        '
+        Me.ForcedShutdownTsmi.Name = "ForcedShutdownTsmi"
+        Me.ForcedShutdownTsmi.Size = New System.Drawing.Size(214, 22)
+        Me.ForcedShutdownTsmi.Text = "編集結果を破棄して終了(&F)"
         '
         'QuitTsmi
         '
         Me.QuitTsmi.Name = "QuitTsmi"
-        Me.QuitTsmi.Size = New System.Drawing.Size(162, 22)
+        Me.QuitTsmi.Size = New System.Drawing.Size(214, 22)
         Me.QuitTsmi.Text = "終了(&Q)"
         '
         'EditTsmi
         '
-        Me.EditTsmi.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddTsmi, Me.ChangeTsmi, Me.DeleteTsmi})
+        Me.EditTsmi.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddTsmi, Me.ChangeTsmi, Me.DeleteTsmi, Me.EditTss1, Me.SettingTsmi})
         Me.EditTsmi.Name = "EditTsmi"
         Me.EditTsmi.Size = New System.Drawing.Size(60, 20)
         Me.EditTsmi.Text = "編集(&E)"
@@ -110,6 +125,17 @@ Partial Class AccountBook
         Me.DeleteTsmi.Name = "DeleteTsmi"
         Me.DeleteTsmi.Size = New System.Drawing.Size(163, 22)
         Me.DeleteTsmi.Text = "削除(&D)"
+        '
+        'EditTss1
+        '
+        Me.EditTss1.Name = "EditTss1"
+        Me.EditTss1.Size = New System.Drawing.Size(160, 6)
+        '
+        'SettingTsmi
+        '
+        Me.SettingTsmi.Name = "SettingTsmi"
+        Me.SettingTsmi.Size = New System.Drawing.Size(163, 22)
+        Me.SettingTsmi.Text = "設定(&S)"
         '
         'ViewTsmi
         '
@@ -287,4 +313,8 @@ Partial Class AccountBook
     Friend WithEvents MoneyDataTableBindingSource As BindingSource
     Friend WithEvents MoneyDataSet As MoneyDataSet
     Friend WithEvents CategoryDataSet1 As CategoryDataSet
+    Friend WithEvents EditTss1 As ToolStripSeparator
+    Friend WithEvents SettingTsmi As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents ForcedShutdownTsmi As ToolStripMenuItem
 End Class

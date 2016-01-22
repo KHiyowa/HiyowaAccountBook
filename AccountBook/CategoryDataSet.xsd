@@ -15,12 +15,16 @@
         <xs:element name="CategoryDataTable" msprop:Generator_TableClassName="CategoryDataTableDataTable" msprop:Generator_TableVarName="tableCategoryDataTable" msprop:Generator_TablePropName="CategoryDataTable" msprop:Generator_RowDeletingName="CategoryDataTableRowDeleting" msprop:Generator_RowChangingName="CategoryDataTableRowChanging" msprop:Generator_RowEvHandlerName="CategoryDataTableRowChangeEventHandler" msprop:Generator_RowDeletedName="CategoryDataTableRowDeleted" msprop:Generator_UserTableName="CategoryDataTable" msprop:Generator_RowChangedName="CategoryDataTableRowChanged" msprop:Generator_RowEvArgName="CategoryDataTableRowChangeEvent" msprop:Generator_RowClassName="CategoryDataTableRow">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="分類" msprop:Generator_ColumnVarNameInTable="column分類" msprop:Generator_ColumnPropNameInRow="分類" msprop:Generator_ColumnPropNameInTable="分類Column" msprop:Generator_UserColumnName="分類" type="xs:string" minOccurs="0" />
-              <xs:element name="入金" msprop:Generator_ColumnVarNameInTable="column入金" msprop:Generator_ColumnPropNameInRow="入金" msprop:Generator_ColumnPropNameInTable="入金Column" msprop:Generator_UserColumnName="入金" type="xs:boolean" minOccurs="0" />
+              <xs:element name="分類" msprop:Generator_ColumnVarNameInTable="column分類" msprop:Generator_ColumnPropNameInRow="分類" msprop:Generator_ColumnPropNameInTable="分類Column" msprop:Generator_UserColumnName="分類" type="xs:string" />
+              <xs:element name="収入" msprop:Generator_ColumnVarNameInTable="column収入" msprop:Generator_ColumnPropNameInRow="収入" msprop:Generator_ColumnPropNameInTable="収入Column" msprop:Generator_UserColumnName="収入" type="xs:boolean" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
       </xs:choice>
     </xs:complexType>
+    <xs:unique name="Constraint1">
+      <xs:selector xpath=".//mstns:CategoryDataTable" />
+      <xs:field xpath="mstns:分類" />
+    </xs:unique>
   </xs:element>
 </xs:schema>
