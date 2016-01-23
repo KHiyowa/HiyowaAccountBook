@@ -22,7 +22,6 @@ Partial Class AccountBook
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.CommandBarMs = New System.Windows.Forms.MenuStrip()
         Me.FileTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveTsmi = New System.Windows.Forms.ToolStripMenuItem()
@@ -41,13 +40,6 @@ Partial Class AccountBook
         Me.HelpTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.VersionInfoTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.AccountDgv = New System.Windows.Forms.DataGridView()
-        Me.日付DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.分類DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.品名DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.金額DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.備考DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MoneyDataTableBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.MoneyDataSet = New AccountBook1.MoneyDataSet()
         Me.QuitBtn = New System.Windows.Forms.Button()
         Me.AddBtn = New System.Windows.Forms.Button()
         Me.ChangeBtn = New System.Windows.Forms.Button()
@@ -55,8 +47,6 @@ Partial Class AccountBook
         Me.CategoryDataSet1 = New AccountBook1.CategoryDataSet()
         Me.CommandBarMs.SuspendLayout()
         CType(Me.AccountDgv, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.MoneyDataTableBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.MoneyDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CategoryDataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -171,55 +161,12 @@ Partial Class AccountBook
         '
         'AccountDgv
         '
-        Me.AccountDgv.AutoGenerateColumns = False
         Me.AccountDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.AccountDgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.日付DataGridViewTextBoxColumn, Me.分類DataGridViewTextBoxColumn, Me.品名DataGridViewTextBoxColumn, Me.金額DataGridViewTextBoxColumn, Me.備考DataGridViewTextBoxColumn})
-        Me.AccountDgv.DataSource = Me.MoneyDataTableBindingSource
         Me.AccountDgv.Location = New System.Drawing.Point(12, 27)
         Me.AccountDgv.Name = "AccountDgv"
         Me.AccountDgv.RowTemplate.Height = 21
         Me.AccountDgv.Size = New System.Drawing.Size(474, 285)
         Me.AccountDgv.TabIndex = 1
-        '
-        '日付DataGridViewTextBoxColumn
-        '
-        Me.日付DataGridViewTextBoxColumn.DataPropertyName = "日付"
-        Me.日付DataGridViewTextBoxColumn.HeaderText = "日付"
-        Me.日付DataGridViewTextBoxColumn.Name = "日付DataGridViewTextBoxColumn"
-        '
-        '分類DataGridViewTextBoxColumn
-        '
-        Me.分類DataGridViewTextBoxColumn.DataPropertyName = "分類"
-        Me.分類DataGridViewTextBoxColumn.HeaderText = "分類"
-        Me.分類DataGridViewTextBoxColumn.Name = "分類DataGridViewTextBoxColumn"
-        '
-        '品名DataGridViewTextBoxColumn
-        '
-        Me.品名DataGridViewTextBoxColumn.DataPropertyName = "品名"
-        Me.品名DataGridViewTextBoxColumn.HeaderText = "品名"
-        Me.品名DataGridViewTextBoxColumn.Name = "品名DataGridViewTextBoxColumn"
-        '
-        '金額DataGridViewTextBoxColumn
-        '
-        Me.金額DataGridViewTextBoxColumn.DataPropertyName = "金額"
-        Me.金額DataGridViewTextBoxColumn.HeaderText = "金額"
-        Me.金額DataGridViewTextBoxColumn.Name = "金額DataGridViewTextBoxColumn"
-        '
-        '備考DataGridViewTextBoxColumn
-        '
-        Me.備考DataGridViewTextBoxColumn.DataPropertyName = "備考"
-        Me.備考DataGridViewTextBoxColumn.HeaderText = "備考"
-        Me.備考DataGridViewTextBoxColumn.Name = "備考DataGridViewTextBoxColumn"
-        '
-        'MoneyDataTableBindingSource
-        '
-        Me.MoneyDataTableBindingSource.DataMember = "MoneyDataTable"
-        Me.MoneyDataTableBindingSource.DataSource = Me.MoneyDataSet
-        '
-        'MoneyDataSet
-        '
-        Me.MoneyDataSet.DataSetName = "MoneyDataSet"
-        Me.MoneyDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'QuitBtn
         '
@@ -279,8 +226,6 @@ Partial Class AccountBook
         Me.CommandBarMs.ResumeLayout(False)
         Me.CommandBarMs.PerformLayout()
         CType(Me.AccountDgv, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.MoneyDataTableBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.MoneyDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CategoryDataSet1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -305,16 +250,9 @@ Partial Class AccountBook
     Friend WithEvents CountingTsmi As ToolStripMenuItem
     Friend WithEvents HelpTsmi As ToolStripMenuItem
     Friend WithEvents VersionInfoTsmi As ToolStripMenuItem
-    Friend WithEvents 日付DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents 分類DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents 品名DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents 金額DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents 備考DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents MoneyDataTableBindingSource As BindingSource
-    Friend WithEvents MoneyDataSet As MoneyDataSet
-    Friend WithEvents CategoryDataSet1 As CategoryDataSet
     Friend WithEvents EditTss1 As ToolStripSeparator
     Friend WithEvents SettingTsmi As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents ForcedShutdownTsmi As ToolStripMenuItem
+    Friend WithEvents CategoryDataSet1 As CategoryDataSet
 End Class

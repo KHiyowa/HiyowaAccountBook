@@ -53,14 +53,13 @@ Public Class AccountBook
         Dim DrRet As DialogResult = FrmEntry.ShowDialog()
 
         If DrRet = DialogResult.OK Then
-            MoneyDataSet.MoneyDataTable.AddMoneyDataTableRow(
-            FrmEntry.MonCalendar.SelectionRange.Start,
-            AddCategory(FrmEntry.CmbCategory.Text),
-            FrmEntry.TxtItem.Text,
-            Integer.Parse(FrmEntry.MTxtMoney.Text),
-            FrmEntry.TxtRemarks.Text)
+            EditMoney("INSERT INTO MoneyDataBase VALUES(" &
+                FrmEntry.MonCalendar.SelectionRange.Start & "," _
+                & """" & AddCategory(FrmEntry.CmbCategory.Text) & """" & "," _
+                & """" & FrmEntry.TxtItem.Text & """" & "," _
+                & Integer.Parse(FrmEntry.MTxtMoney.Text) & "," _
+                & """" & FrmEntry.TxtRemarks.Text & """" & ")")
         End If
-        ChangeSavedState(False)
     End Sub
 #End Region
 
@@ -137,50 +136,13 @@ Public Class AccountBook
 
     Sub SaveData()
         If Saved Then Return ' すでに保存されていれば何もしない
-        Dim path As String = "MoneyData.csv"    '  出力ファイル名
-        Dim StrData As String = ""              '  行分のデータ
-        Dim sw As StreamWriter = New StreamWriter(
-            path,
-            False,
-            Encoding.Default)
-        For Each DrMoney As MoneyDataSet.MoneyDataTableRow In MoneyDataSet.MoneyDataTable
-            StrData = DrMoney.日付.ToShortDateString() + "," _
-            + DrMoney.分類 + "," _
-            + DrMoney.品名 + "," _
-            + DrMoney.金額.ToString() + "," _
-            + DrMoney.備考
-            sw.WriteLine(StrData)
-        Next
-        sw.Close()
         ChangeSavedState(True)
     End Sub
 #End Region
 
 #Region "読出"
     Sub LoadData()
-        Dim path As String = "MoneyData.csv"
-        Dim DelimStr As String = ","
-        Dim delimiter As Char() = DelimStr.ToArray()
-        Dim StrData As String()
-        Dim StrLine As String
-        Dim FileExists As Boolean = File.Exists(path)
-
-        If FileExists Then
-            Dim sr As StreamReader = New StreamReader(
-                path,
-                Encoding.Default)
-            Do While sr.Peek() >= 0
-                StrLine = sr.ReadLine()
-                StrData = StrLine.Split(delimiter)
-                MoneyDataSet.MoneyDataTable.AddMoneyDataTableRow(
-                    DateTime.Parse(StrData(0)),
-                    StrData(1),
-                    StrData(2),
-                    Integer.Parse(StrData(3)),
-                    StrData(4))
-            Loop
-            sr.Close()
-        End If
+        LoadMoney()
     End Sub
 #End Region
 

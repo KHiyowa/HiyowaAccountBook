@@ -93,6 +93,7 @@
     <Compile Include="CategoryDataSet.vb">
       <DependentUpon>CategoryDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DataBaseHandle.vb" />
     <Compile Include="SettingFm.Designer.vb">
       <DependentUpon>SettingFm.vb</DependentUpon>
     </Compile>
@@ -105,11 +106,6 @@
     <Compile Include="EntryFm.Designer.vb">
       <DependentUpon>EntryFm.vb</DependentUpon>
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MoneyDataSet.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MoneyDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -158,17 +154,6 @@
     </None>
     <None Include="CategoryDataSet.xss">
       <DependentUpon>CategoryDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="MoneyDataSet.xsc">
-      <DependentUpon>MoneyDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="MoneyDataSet.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>MoneyDataSet.Designer.vb</LastGenOutput>
-    </None>
-    <None Include="MoneyDataSet.xss">
-      <DependentUpon>MoneyDataSet.xsd</DependentUpon>
     </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
