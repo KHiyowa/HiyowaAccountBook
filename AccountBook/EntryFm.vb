@@ -18,6 +18,7 @@ Public Class EntryFm
                item As String,
                money As Integer,
                remarks As String)
+
         InitializeComponent()
         CategoryDataSet.Merge(DsCategory)
         MonCalendar.SetDate(NowDate)

@@ -33,13 +33,15 @@ Partial Class SettingFm
         Me.BtnOK = New System.Windows.Forms.Button()
         Me.BtnCancel = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.CategoryDataSet = New AccountBook1.CategoryDataSet()
-        Me.CategoryDataTableBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.分類DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.収入DataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.CategoryDataTableBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.CategoryDataSet = New AccountBook1.CategoryDataSet()
+        Me.CkbDropbox = New System.Windows.Forms.CheckBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CategoryDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CategoryDataTableBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CategoryDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LblSavePath
@@ -70,7 +72,7 @@ Partial Class SettingFm
         'LblCatEdit
         '
         Me.LblCatEdit.AutoSize = True
-        Me.LblCatEdit.Location = New System.Drawing.Point(12, 42)
+        Me.LblCatEdit.Location = New System.Drawing.Point(12, 54)
         Me.LblCatEdit.Name = "LblCatEdit"
         Me.LblCatEdit.Size = New System.Drawing.Size(75, 12)
         Me.LblCatEdit.TabIndex = 4
@@ -78,7 +80,7 @@ Partial Class SettingFm
         '
         'DeleteBtn
         '
-        Me.DeleteBtn.Location = New System.Drawing.Point(174, 257)
+        Me.DeleteBtn.Location = New System.Drawing.Point(174, 293)
         Me.DeleteBtn.Name = "DeleteBtn"
         Me.DeleteBtn.Size = New System.Drawing.Size(75, 23)
         Me.DeleteBtn.TabIndex = 9
@@ -87,7 +89,7 @@ Partial Class SettingFm
         '
         'ChangeBtn
         '
-        Me.ChangeBtn.Location = New System.Drawing.Point(93, 257)
+        Me.ChangeBtn.Location = New System.Drawing.Point(93, 293)
         Me.ChangeBtn.Name = "ChangeBtn"
         Me.ChangeBtn.Size = New System.Drawing.Size(75, 23)
         Me.ChangeBtn.TabIndex = 8
@@ -96,7 +98,7 @@ Partial Class SettingFm
         '
         'AddBtn
         '
-        Me.AddBtn.Location = New System.Drawing.Point(12, 257)
+        Me.AddBtn.Location = New System.Drawing.Point(12, 293)
         Me.AddBtn.Name = "AddBtn"
         Me.AddBtn.Size = New System.Drawing.Size(75, 23)
         Me.AddBtn.TabIndex = 7
@@ -106,7 +108,7 @@ Partial Class SettingFm
         'BtnOK
         '
         Me.BtnOK.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.BtnOK.Location = New System.Drawing.Point(299, 257)
+        Me.BtnOK.Location = New System.Drawing.Point(299, 293)
         Me.BtnOK.Name = "BtnOK"
         Me.BtnOK.Size = New System.Drawing.Size(75, 23)
         Me.BtnOK.TabIndex = 6
@@ -116,7 +118,7 @@ Partial Class SettingFm
         'BtnCancel
         '
         Me.BtnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.BtnCancel.Location = New System.Drawing.Point(380, 257)
+        Me.BtnCancel.Location = New System.Drawing.Point(380, 293)
         Me.BtnCancel.Name = "BtnCancel"
         Me.BtnCancel.Size = New System.Drawing.Size(75, 23)
         Me.BtnCancel.TabIndex = 10
@@ -129,21 +131,11 @@ Partial Class SettingFm
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.分類DataGridViewTextBoxColumn, Me.収入DataGridViewCheckBoxColumn})
         Me.DataGridView1.DataSource = Me.CategoryDataTableBindingSource
-        Me.DataGridView1.Location = New System.Drawing.Point(14, 57)
+        Me.DataGridView1.Location = New System.Drawing.Point(14, 69)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowTemplate.Height = 21
-        Me.DataGridView1.Size = New System.Drawing.Size(441, 194)
+        Me.DataGridView1.Size = New System.Drawing.Size(441, 218)
         Me.DataGridView1.TabIndex = 11
-        '
-        'CategoryDataSet
-        '
-        Me.CategoryDataSet.DataSetName = "CategoryDataSet"
-        Me.CategoryDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'CategoryDataTableBindingSource
-        '
-        Me.CategoryDataTableBindingSource.DataMember = "CategoryDataTable"
-        Me.CategoryDataTableBindingSource.DataSource = Me.CategoryDataSet
         '
         '分類DataGridViewTextBoxColumn
         '
@@ -157,12 +149,43 @@ Partial Class SettingFm
         Me.収入DataGridViewCheckBoxColumn.HeaderText = "収入"
         Me.収入DataGridViewCheckBoxColumn.Name = "収入DataGridViewCheckBoxColumn"
         '
+        'CategoryDataTableBindingSource
+        '
+        Me.CategoryDataTableBindingSource.DataMember = "CategoryDataTable"
+        Me.CategoryDataTableBindingSource.DataSource = Me.CategoryDataSet
+        '
+        'CategoryDataSet
+        '
+        Me.CategoryDataSet.DataSetName = "CategoryDataSet"
+        Me.CategoryDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'CkbDropbox
+        '
+        Me.CkbDropbox.AutoSize = True
+        Me.CkbDropbox.Location = New System.Drawing.Point(14, 35)
+        Me.CkbDropbox.Name = "CkbDropbox"
+        Me.CkbDropbox.Size = New System.Drawing.Size(94, 16)
+        Me.CkbDropbox.TabIndex = 12
+        Me.CkbDropbox.Text = "Dropboxを使う"
+        Me.CkbDropbox.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(114, 36)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(336, 12)
+        Me.Label1.TabIndex = 13
+        Me.Label1.Text = "チェックすると、5分毎にファイルをチェックし、必要に応じて再読込します。"
+        '
         'SettingFm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(467, 292)
+        Me.ClientSize = New System.Drawing.Size(467, 328)
         Me.ControlBox = False
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.CkbDropbox)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.BtnCancel)
         Me.Controls.Add(Me.DeleteBtn)
@@ -176,8 +199,8 @@ Partial Class SettingFm
         Me.Name = "SettingFm"
         Me.Text = "設定"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.CategoryDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CategoryDataTableBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CategoryDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -198,4 +221,6 @@ Partial Class SettingFm
     Friend WithEvents 収入DataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
     Friend WithEvents CategoryDataTableBindingSource As BindingSource
     Friend WithEvents CategoryDataSet As CategoryDataSet
+    Friend WithEvents CkbDropbox As CheckBox
+    Friend WithEvents Label1 As Label
 End Class

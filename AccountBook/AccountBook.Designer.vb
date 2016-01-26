@@ -25,9 +25,9 @@ Partial Class AccountBook
         Me.components = New System.ComponentModel.Container()
         Me.CommandBarMs = New System.Windows.Forms.MenuStrip()
         Me.FileTsmi = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SaveTsmi = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReloadTsmi = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExportTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ForcedShutdownTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.QuitTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.AddTsmi = New System.Windows.Forms.ToolStripMenuItem()
@@ -46,6 +46,8 @@ Partial Class AccountBook
         Me.品名DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.金額DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.備考DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CreatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FileName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MoneyDataTableBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.MoneyDataSet = New AccountBook1.MoneyDataSet()
         Me.QuitBtn = New System.Windows.Forms.Button()
@@ -53,6 +55,7 @@ Partial Class AccountBook
         Me.ChangeBtn = New System.Windows.Forms.Button()
         Me.DeleteBtn = New System.Windows.Forms.Button()
         Me.CategoryDataSet1 = New AccountBook1.CategoryDataSet()
+        Me.BtnReload = New System.Windows.Forms.Button()
         Me.CommandBarMs.SuspendLayout()
         CType(Me.AccountDgv, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MoneyDataTableBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -71,33 +74,32 @@ Partial Class AccountBook
         '
         'FileTsmi
         '
-        Me.FileTsmi.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveTsmi, Me.ToolStripSeparator1, Me.ForcedShutdownTsmi, Me.QuitTsmi})
+        Me.FileTsmi.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReloadTsmi, Me.ExportTsmi, Me.ToolStripSeparator1, Me.QuitTsmi})
         Me.FileTsmi.Name = "FileTsmi"
         Me.FileTsmi.Size = New System.Drawing.Size(70, 20)
         Me.FileTsmi.Text = "ファイル(&F)"
         '
-        'SaveTsmi
+        'ReloadTsmi
         '
-        Me.SaveTsmi.Name = "SaveTsmi"
-        Me.SaveTsmi.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.SaveTsmi.Size = New System.Drawing.Size(214, 22)
-        Me.SaveTsmi.Text = "保存(&S)"
+        Me.ReloadTsmi.Name = "ReloadTsmi"
+        Me.ReloadTsmi.Size = New System.Drawing.Size(156, 22)
+        Me.ReloadTsmi.Text = "再読込(&R)"
+        '
+        'ExportTsmi
+        '
+        Me.ExportTsmi.Name = "ExportTsmi"
+        Me.ExportTsmi.Size = New System.Drawing.Size(156, 22)
+        Me.ExportTsmi.Text = "集計ツール...(&E)"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(211, 6)
-        '
-        'ForcedShutdownTsmi
-        '
-        Me.ForcedShutdownTsmi.Name = "ForcedShutdownTsmi"
-        Me.ForcedShutdownTsmi.Size = New System.Drawing.Size(214, 22)
-        Me.ForcedShutdownTsmi.Text = "編集結果を破棄して終了(&F)"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(153, 6)
         '
         'QuitTsmi
         '
         Me.QuitTsmi.Name = "QuitTsmi"
-        Me.QuitTsmi.Size = New System.Drawing.Size(214, 22)
+        Me.QuitTsmi.Size = New System.Drawing.Size(156, 22)
         Me.QuitTsmi.Text = "終了(&Q)"
         '
         'EditTsmi
@@ -171,12 +173,16 @@ Partial Class AccountBook
         '
         'AccountDgv
         '
+        Me.AccountDgv.AllowUserToAddRows = False
+        Me.AccountDgv.AllowUserToDeleteRows = False
+        Me.AccountDgv.AllowUserToOrderColumns = True
         Me.AccountDgv.AutoGenerateColumns = False
         Me.AccountDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.AccountDgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.日付DataGridViewTextBoxColumn, Me.分類DataGridViewTextBoxColumn, Me.品名DataGridViewTextBoxColumn, Me.金額DataGridViewTextBoxColumn, Me.備考DataGridViewTextBoxColumn})
+        Me.AccountDgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.日付DataGridViewTextBoxColumn, Me.分類DataGridViewTextBoxColumn, Me.品名DataGridViewTextBoxColumn, Me.金額DataGridViewTextBoxColumn, Me.備考DataGridViewTextBoxColumn, Me.CreatedAt, Me.FileName})
         Me.AccountDgv.DataSource = Me.MoneyDataTableBindingSource
         Me.AccountDgv.Location = New System.Drawing.Point(12, 27)
         Me.AccountDgv.Name = "AccountDgv"
+        Me.AccountDgv.ReadOnly = True
         Me.AccountDgv.RowTemplate.Height = 21
         Me.AccountDgv.Size = New System.Drawing.Size(474, 285)
         Me.AccountDgv.TabIndex = 1
@@ -186,30 +192,51 @@ Partial Class AccountBook
         Me.日付DataGridViewTextBoxColumn.DataPropertyName = "日付"
         Me.日付DataGridViewTextBoxColumn.HeaderText = "日付"
         Me.日付DataGridViewTextBoxColumn.Name = "日付DataGridViewTextBoxColumn"
+        Me.日付DataGridViewTextBoxColumn.ReadOnly = True
         '
         '分類DataGridViewTextBoxColumn
         '
         Me.分類DataGridViewTextBoxColumn.DataPropertyName = "分類"
         Me.分類DataGridViewTextBoxColumn.HeaderText = "分類"
         Me.分類DataGridViewTextBoxColumn.Name = "分類DataGridViewTextBoxColumn"
+        Me.分類DataGridViewTextBoxColumn.ReadOnly = True
         '
         '品名DataGridViewTextBoxColumn
         '
         Me.品名DataGridViewTextBoxColumn.DataPropertyName = "品名"
         Me.品名DataGridViewTextBoxColumn.HeaderText = "品名"
         Me.品名DataGridViewTextBoxColumn.Name = "品名DataGridViewTextBoxColumn"
+        Me.品名DataGridViewTextBoxColumn.ReadOnly = True
         '
         '金額DataGridViewTextBoxColumn
         '
         Me.金額DataGridViewTextBoxColumn.DataPropertyName = "金額"
         Me.金額DataGridViewTextBoxColumn.HeaderText = "金額"
         Me.金額DataGridViewTextBoxColumn.Name = "金額DataGridViewTextBoxColumn"
+        Me.金額DataGridViewTextBoxColumn.ReadOnly = True
         '
         '備考DataGridViewTextBoxColumn
         '
         Me.備考DataGridViewTextBoxColumn.DataPropertyName = "備考"
         Me.備考DataGridViewTextBoxColumn.HeaderText = "備考"
         Me.備考DataGridViewTextBoxColumn.Name = "備考DataGridViewTextBoxColumn"
+        Me.備考DataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'CreatedAt
+        '
+        Me.CreatedAt.DataPropertyName = "CreatedAt"
+        Me.CreatedAt.HeaderText = "CreatedAt"
+        Me.CreatedAt.Name = "CreatedAt"
+        Me.CreatedAt.ReadOnly = True
+        Me.CreatedAt.Visible = False
+        '
+        'FileName
+        '
+        Me.FileName.DataPropertyName = "FileName"
+        Me.FileName.HeaderText = "FileName"
+        Me.FileName.Name = "FileName"
+        Me.FileName.ReadOnly = True
+        Me.FileName.Visible = False
         '
         'MoneyDataTableBindingSource
         '
@@ -262,11 +289,21 @@ Partial Class AccountBook
         Me.CategoryDataSet1.DataSetName = "CategoryDataSet"
         Me.CategoryDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
+        'BtnReload
+        '
+        Me.BtnReload.Location = New System.Drawing.Point(330, 318)
+        Me.BtnReload.Name = "BtnReload"
+        Me.BtnReload.Size = New System.Drawing.Size(75, 23)
+        Me.BtnReload.TabIndex = 6
+        Me.BtnReload.Text = "再読込"
+        Me.BtnReload.UseVisualStyleBackColor = True
+        '
         'AccountBook
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(498, 353)
+        Me.Controls.Add(Me.BtnReload)
         Me.Controls.Add(Me.DeleteBtn)
         Me.Controls.Add(Me.ChangeBtn)
         Me.Controls.Add(Me.AddBtn)
@@ -289,7 +326,7 @@ Partial Class AccountBook
 
     Friend WithEvents CommandBarMs As MenuStrip
     Friend WithEvents FileTsmi As ToolStripMenuItem
-    Friend WithEvents SaveTsmi As ToolStripMenuItem
+    Friend WithEvents ExportTsmi As ToolStripMenuItem
     Friend WithEvents QuitTsmi As ToolStripMenuItem
     Friend WithEvents EditTsmi As ToolStripMenuItem
     Friend WithEvents AddTsmi As ToolStripMenuItem
@@ -305,16 +342,19 @@ Partial Class AccountBook
     Friend WithEvents CountingTsmi As ToolStripMenuItem
     Friend WithEvents HelpTsmi As ToolStripMenuItem
     Friend WithEvents VersionInfoTsmi As ToolStripMenuItem
-    Friend WithEvents 日付DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents 分類DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents 品名DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents 金額DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents 備考DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents MoneyDataTableBindingSource As BindingSource
     Friend WithEvents MoneyDataSet As MoneyDataSet
     Friend WithEvents CategoryDataSet1 As CategoryDataSet
     Friend WithEvents EditTss1 As ToolStripSeparator
     Friend WithEvents SettingTsmi As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
-    Friend WithEvents ForcedShutdownTsmi As ToolStripMenuItem
+    Friend WithEvents BtnReload As Button
+    Friend WithEvents ReloadTsmi As ToolStripMenuItem
+    Friend WithEvents 日付DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents 分類DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents 品名DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents 金額DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents 備考DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents CreatedAt As DataGridViewTextBoxColumn
+    Friend WithEvents FileName As DataGridViewTextBoxColumn
 End Class
