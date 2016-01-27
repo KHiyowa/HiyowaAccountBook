@@ -293,8 +293,6 @@ Partial Public Class MoneyDataSet
         
         Private column備考 As Global.System.Data.DataColumn
         
-        Private columnCreatedAt As Global.System.Data.DataColumn
-        
         Private columnFileName As Global.System.Data.DataColumn
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -374,14 +372,6 @@ Partial Public Class MoneyDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property CreatedAtColumn() As Global.System.Data.DataColumn
-            Get
-                Return Me.columnCreatedAt
-            End Get
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public ReadOnly Property FileNameColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnFileName
@@ -425,9 +415,9 @@ Partial Public Class MoneyDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddMoneyDataTableRow(ByVal 日付 As Date, ByVal 分類 As String, ByVal 品名 As String, ByVal 金額 As Integer, ByVal 備考 As String, ByVal CreatedAt As Date, ByVal FileName As String) As MoneyDataTableRow
+        Public Overloads Function AddMoneyDataTableRow(ByVal 日付 As Date, ByVal 分類 As String, ByVal 品名 As String, ByVal 金額 As Integer, ByVal 備考 As String, ByVal FileName As String) As MoneyDataTableRow
             Dim rowMoneyDataTableRow As MoneyDataTableRow = CType(Me.NewRow,MoneyDataTableRow)
-            Dim columnValuesArray() As Object = New Object() {日付, 分類, 品名, 金額, 備考, CreatedAt, FileName}
+            Dim columnValuesArray() As Object = New Object() {日付, 分類, 品名, 金額, 備考, FileName}
             rowMoneyDataTableRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowMoneyDataTableRow)
             Return rowMoneyDataTableRow
@@ -455,7 +445,6 @@ Partial Public Class MoneyDataSet
             Me.column品名 = MyBase.Columns("品名")
             Me.column金額 = MyBase.Columns("金額")
             Me.column備考 = MyBase.Columns("備考")
-            Me.columnCreatedAt = MyBase.Columns("CreatedAt")
             Me.columnFileName = MyBase.Columns("FileName")
         End Sub
         
@@ -472,8 +461,6 @@ Partial Public Class MoneyDataSet
             MyBase.Columns.Add(Me.column金額)
             Me.column備考 = New Global.System.Data.DataColumn("備考", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.column備考)
-            Me.columnCreatedAt = New Global.System.Data.DataColumn("CreatedAt", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnCreatedAt)
             Me.columnFileName = New Global.System.Data.DataColumn("FileName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnFileName)
         End Sub
@@ -697,21 +684,6 @@ Partial Public Class MoneyDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property CreatedAt() As Date
-            Get
-                Try 
-                    Return CType(Me(Me.tableMoneyDataTable.CreatedAtColumn),Date)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("テーブル 'MoneyDataTable' にある列 'CreatedAt' の値は DBNull です。", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableMoneyDataTable.CreatedAtColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property FileName() As String
             Get
                 Try 
@@ -783,18 +755,6 @@ Partial Public Class MoneyDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub Set備考Null()
             Me(Me.tableMoneyDataTable.備考Column) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsCreatedAtNull() As Boolean
-            Return Me.IsNull(Me.tableMoneyDataTable.CreatedAtColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetCreatedAtNull()
-            Me(Me.tableMoneyDataTable.CreatedAtColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _

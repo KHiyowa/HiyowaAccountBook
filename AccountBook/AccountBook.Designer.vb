@@ -41,13 +41,6 @@ Partial Class AccountBook
         Me.HelpTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.VersionInfoTsmi = New System.Windows.Forms.ToolStripMenuItem()
         Me.AccountDgv = New System.Windows.Forms.DataGridView()
-        Me.日付DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.分類DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.品名DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.金額DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.備考DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CreatedAt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FileName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MoneyDataTableBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.MoneyDataSet = New AccountBook1.MoneyDataSet()
         Me.QuitBtn = New System.Windows.Forms.Button()
@@ -56,6 +49,14 @@ Partial Class AccountBook
         Me.DeleteBtn = New System.Windows.Forms.Button()
         Me.CategoryDataSet1 = New AccountBook1.CategoryDataSet()
         Me.BtnReload = New System.Windows.Forms.Button()
+        Me.ReloadTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.日付DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.分類DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.品名DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.金額DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.備考DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FileName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FbdPickDataFolder = New System.Windows.Forms.FolderBrowserDialog()
         Me.CommandBarMs.SuspendLayout()
         CType(Me.AccountDgv, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MoneyDataTableBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -178,7 +179,7 @@ Partial Class AccountBook
         Me.AccountDgv.AllowUserToOrderColumns = True
         Me.AccountDgv.AutoGenerateColumns = False
         Me.AccountDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.AccountDgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.日付DataGridViewTextBoxColumn, Me.分類DataGridViewTextBoxColumn, Me.品名DataGridViewTextBoxColumn, Me.金額DataGridViewTextBoxColumn, Me.備考DataGridViewTextBoxColumn, Me.CreatedAt, Me.FileName})
+        Me.AccountDgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.日付DataGridViewTextBoxColumn, Me.分類DataGridViewTextBoxColumn, Me.品名DataGridViewTextBoxColumn, Me.金額DataGridViewTextBoxColumn, Me.備考DataGridViewTextBoxColumn, Me.FileName})
         Me.AccountDgv.DataSource = Me.MoneyDataTableBindingSource
         Me.AccountDgv.Location = New System.Drawing.Point(12, 27)
         Me.AccountDgv.Name = "AccountDgv"
@@ -186,57 +187,6 @@ Partial Class AccountBook
         Me.AccountDgv.RowTemplate.Height = 21
         Me.AccountDgv.Size = New System.Drawing.Size(474, 285)
         Me.AccountDgv.TabIndex = 1
-        '
-        '日付DataGridViewTextBoxColumn
-        '
-        Me.日付DataGridViewTextBoxColumn.DataPropertyName = "日付"
-        Me.日付DataGridViewTextBoxColumn.HeaderText = "日付"
-        Me.日付DataGridViewTextBoxColumn.Name = "日付DataGridViewTextBoxColumn"
-        Me.日付DataGridViewTextBoxColumn.ReadOnly = True
-        '
-        '分類DataGridViewTextBoxColumn
-        '
-        Me.分類DataGridViewTextBoxColumn.DataPropertyName = "分類"
-        Me.分類DataGridViewTextBoxColumn.HeaderText = "分類"
-        Me.分類DataGridViewTextBoxColumn.Name = "分類DataGridViewTextBoxColumn"
-        Me.分類DataGridViewTextBoxColumn.ReadOnly = True
-        '
-        '品名DataGridViewTextBoxColumn
-        '
-        Me.品名DataGridViewTextBoxColumn.DataPropertyName = "品名"
-        Me.品名DataGridViewTextBoxColumn.HeaderText = "品名"
-        Me.品名DataGridViewTextBoxColumn.Name = "品名DataGridViewTextBoxColumn"
-        Me.品名DataGridViewTextBoxColumn.ReadOnly = True
-        '
-        '金額DataGridViewTextBoxColumn
-        '
-        Me.金額DataGridViewTextBoxColumn.DataPropertyName = "金額"
-        Me.金額DataGridViewTextBoxColumn.HeaderText = "金額"
-        Me.金額DataGridViewTextBoxColumn.Name = "金額DataGridViewTextBoxColumn"
-        Me.金額DataGridViewTextBoxColumn.ReadOnly = True
-        '
-        '備考DataGridViewTextBoxColumn
-        '
-        Me.備考DataGridViewTextBoxColumn.DataPropertyName = "備考"
-        Me.備考DataGridViewTextBoxColumn.HeaderText = "備考"
-        Me.備考DataGridViewTextBoxColumn.Name = "備考DataGridViewTextBoxColumn"
-        Me.備考DataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'CreatedAt
-        '
-        Me.CreatedAt.DataPropertyName = "CreatedAt"
-        Me.CreatedAt.HeaderText = "CreatedAt"
-        Me.CreatedAt.Name = "CreatedAt"
-        Me.CreatedAt.ReadOnly = True
-        Me.CreatedAt.Visible = False
-        '
-        'FileName
-        '
-        Me.FileName.DataPropertyName = "FileName"
-        Me.FileName.HeaderText = "FileName"
-        Me.FileName.Name = "FileName"
-        Me.FileName.ReadOnly = True
-        Me.FileName.Visible = False
         '
         'MoneyDataTableBindingSource
         '
@@ -298,6 +248,53 @@ Partial Class AccountBook
         Me.BtnReload.Text = "再読込"
         Me.BtnReload.UseVisualStyleBackColor = True
         '
+        'ReloadTimer
+        '
+        Me.ReloadTimer.Interval = 300000
+        '
+        '日付DataGridViewTextBoxColumn
+        '
+        Me.日付DataGridViewTextBoxColumn.DataPropertyName = "日付"
+        Me.日付DataGridViewTextBoxColumn.HeaderText = "日付"
+        Me.日付DataGridViewTextBoxColumn.Name = "日付DataGridViewTextBoxColumn"
+        Me.日付DataGridViewTextBoxColumn.ReadOnly = True
+        '
+        '分類DataGridViewTextBoxColumn
+        '
+        Me.分類DataGridViewTextBoxColumn.DataPropertyName = "分類"
+        Me.分類DataGridViewTextBoxColumn.HeaderText = "分類"
+        Me.分類DataGridViewTextBoxColumn.Name = "分類DataGridViewTextBoxColumn"
+        Me.分類DataGridViewTextBoxColumn.ReadOnly = True
+        '
+        '品名DataGridViewTextBoxColumn
+        '
+        Me.品名DataGridViewTextBoxColumn.DataPropertyName = "品名"
+        Me.品名DataGridViewTextBoxColumn.HeaderText = "品名"
+        Me.品名DataGridViewTextBoxColumn.Name = "品名DataGridViewTextBoxColumn"
+        Me.品名DataGridViewTextBoxColumn.ReadOnly = True
+        '
+        '金額DataGridViewTextBoxColumn
+        '
+        Me.金額DataGridViewTextBoxColumn.DataPropertyName = "金額"
+        Me.金額DataGridViewTextBoxColumn.HeaderText = "金額"
+        Me.金額DataGridViewTextBoxColumn.Name = "金額DataGridViewTextBoxColumn"
+        Me.金額DataGridViewTextBoxColumn.ReadOnly = True
+        '
+        '備考DataGridViewTextBoxColumn
+        '
+        Me.備考DataGridViewTextBoxColumn.DataPropertyName = "備考"
+        Me.備考DataGridViewTextBoxColumn.HeaderText = "備考"
+        Me.備考DataGridViewTextBoxColumn.Name = "備考DataGridViewTextBoxColumn"
+        Me.備考DataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'FileName
+        '
+        Me.FileName.DataPropertyName = "FileName"
+        Me.FileName.HeaderText = "FileName"
+        Me.FileName.Name = "FileName"
+        Me.FileName.ReadOnly = True
+        Me.FileName.Visible = False
+        '
         'AccountBook
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -350,11 +347,12 @@ Partial Class AccountBook
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents BtnReload As Button
     Friend WithEvents ReloadTsmi As ToolStripMenuItem
+    Friend WithEvents ReloadTimer As Timer
     Friend WithEvents 日付DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents 分類DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents 品名DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents 金額DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents 備考DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents CreatedAt As DataGridViewTextBoxColumn
     Friend WithEvents FileName As DataGridViewTextBoxColumn
+    Friend WithEvents FbdPickDataFolder As FolderBrowserDialog
 End Class

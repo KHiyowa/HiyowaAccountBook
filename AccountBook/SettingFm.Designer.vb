@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class SettingFm
     Inherits System.Windows.Forms.Form
 
     'フォームがコンポーネントの一覧をクリーンアップするために dispose をオーバーライドします。
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class SettingFm
     'メモ: 以下のプロシージャは Windows フォーム デザイナーで必要です。
     'Windows フォーム デザイナーを使用して変更できます。  
     'コード エディターを使って変更しないでください。
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.LblSavePath = New System.Windows.Forms.Label()
@@ -32,14 +32,15 @@ Partial Class SettingFm
         Me.AddBtn = New System.Windows.Forms.Button()
         Me.BtnOK = New System.Windows.Forms.Button()
         Me.BtnCancel = New System.Windows.Forms.Button()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.分類DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.収入DataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.CategoryDgv = New System.Windows.Forms.DataGridView()
         Me.CategoryDataTableBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.CategoryDataSet = New AccountBook1.CategoryDataSet()
         Me.CkbDropbox = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.分類DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.収入DataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.FileName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        CType(Me.CategoryDgv, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CategoryDataTableBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CategoryDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -125,29 +126,20 @@ Partial Class SettingFm
         Me.BtnCancel.Text = "取消(&N)"
         Me.BtnCancel.UseVisualStyleBackColor = True
         '
-        'DataGridView1
+        'CategoryDgv
         '
-        Me.DataGridView1.AutoGenerateColumns = False
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.分類DataGridViewTextBoxColumn, Me.収入DataGridViewCheckBoxColumn})
-        Me.DataGridView1.DataSource = Me.CategoryDataTableBindingSource
-        Me.DataGridView1.Location = New System.Drawing.Point(14, 69)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowTemplate.Height = 21
-        Me.DataGridView1.Size = New System.Drawing.Size(441, 218)
-        Me.DataGridView1.TabIndex = 11
-        '
-        '分類DataGridViewTextBoxColumn
-        '
-        Me.分類DataGridViewTextBoxColumn.DataPropertyName = "分類"
-        Me.分類DataGridViewTextBoxColumn.HeaderText = "分類"
-        Me.分類DataGridViewTextBoxColumn.Name = "分類DataGridViewTextBoxColumn"
-        '
-        '収入DataGridViewCheckBoxColumn
-        '
-        Me.収入DataGridViewCheckBoxColumn.DataPropertyName = "収入"
-        Me.収入DataGridViewCheckBoxColumn.HeaderText = "収入"
-        Me.収入DataGridViewCheckBoxColumn.Name = "収入DataGridViewCheckBoxColumn"
+        Me.CategoryDgv.AllowUserToAddRows = False
+        Me.CategoryDgv.AllowUserToDeleteRows = False
+        Me.CategoryDgv.AutoGenerateColumns = False
+        Me.CategoryDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.CategoryDgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.分類DataGridViewTextBoxColumn, Me.収入DataGridViewCheckBoxColumn, Me.FileName})
+        Me.CategoryDgv.DataSource = Me.CategoryDataTableBindingSource
+        Me.CategoryDgv.Location = New System.Drawing.Point(14, 69)
+        Me.CategoryDgv.Name = "CategoryDgv"
+        Me.CategoryDgv.ReadOnly = True
+        Me.CategoryDgv.RowTemplate.Height = 21
+        Me.CategoryDgv.Size = New System.Drawing.Size(441, 218)
+        Me.CategoryDgv.TabIndex = 11
         '
         'CategoryDataTableBindingSource
         '
@@ -174,9 +166,31 @@ Partial Class SettingFm
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(114, 36)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(336, 12)
+        Me.Label1.Size = New System.Drawing.Size(222, 12)
         Me.Label1.TabIndex = 13
-        Me.Label1.Text = "チェックすると、5分毎にファイルをチェックし、必要に応じて再読込します。"
+        Me.Label1.Text = "チェックすると、定期的に自動で再読込します。"
+        '
+        '分類DataGridViewTextBoxColumn
+        '
+        Me.分類DataGridViewTextBoxColumn.DataPropertyName = "分類"
+        Me.分類DataGridViewTextBoxColumn.HeaderText = "分類"
+        Me.分類DataGridViewTextBoxColumn.Name = "分類DataGridViewTextBoxColumn"
+        Me.分類DataGridViewTextBoxColumn.ReadOnly = True
+        '
+        '収入DataGridViewCheckBoxColumn
+        '
+        Me.収入DataGridViewCheckBoxColumn.DataPropertyName = "収入"
+        Me.収入DataGridViewCheckBoxColumn.HeaderText = "収入"
+        Me.収入DataGridViewCheckBoxColumn.Name = "収入DataGridViewCheckBoxColumn"
+        Me.収入DataGridViewCheckBoxColumn.ReadOnly = True
+        '
+        'FileName
+        '
+        Me.FileName.DataPropertyName = "FileName"
+        Me.FileName.HeaderText = "FileName"
+        Me.FileName.Name = "FileName"
+        Me.FileName.ReadOnly = True
+        Me.FileName.Visible = False
         '
         'SettingFm
         '
@@ -186,7 +200,7 @@ Partial Class SettingFm
         Me.ControlBox = False
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.CkbDropbox)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.Controls.Add(Me.CategoryDgv)
         Me.Controls.Add(Me.BtnCancel)
         Me.Controls.Add(Me.DeleteBtn)
         Me.Controls.Add(Me.ChangeBtn)
@@ -198,7 +212,7 @@ Partial Class SettingFm
         Me.Controls.Add(Me.LblSavePath)
         Me.Name = "SettingFm"
         Me.Text = "設定"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CategoryDgv, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CategoryDataTableBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.CategoryDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -215,12 +229,13 @@ Partial Class SettingFm
     Friend WithEvents AddBtn As Button
     Friend WithEvents BtnOK As Button
     Friend WithEvents BtnCancel As Button
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents CategoryDgv As DataGridView
     Friend WithEvents 入金DataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
-    Friend WithEvents 分類DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents 収入DataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
     Friend WithEvents CategoryDataTableBindingSource As BindingSource
     Friend WithEvents CategoryDataSet As CategoryDataSet
     Friend WithEvents CkbDropbox As CheckBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents 分類DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents 収入DataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
+    Friend WithEvents FileName As DataGridViewTextBoxColumn
 End Class

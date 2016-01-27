@@ -3,10 +3,14 @@ Imports System.Text
 Public Class AccountBook
     Dim SaveFilePath As String
     Dim DataFileDir As String = "\Data"
-    Dim ConfFileDir As String = "\Conf"
+    Dim ConfFileName As String = "Settings.ini"
+    Public CategoryFileDir As String = "\Category"
 
 #Region "ロード"
     Private Sub AccountBook_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' 乱数初期化
+        Randomize()
+        ' データのロード
         LoadData()
     End Sub
 #End Region
@@ -28,8 +32,7 @@ Public Class AccountBook
 
         If DrRet = DialogResult.OK Then
             ' リストに反映
-            Dim CreatedAt As DateTime = System.DateTime.Now
-            Dim FileName As String = CreateFilename(CreatedAt) + ".habr"
+            Dim FileName As String = CreateFilename() + ".habr"
 
             MoneyDataSet.MoneyDataTable.AddMoneyDataTableRow(
                 FrmEntry.MonCalendar.SelectionRange.Start,
@@ -37,7 +40,6 @@ Public Class AccountBook
                 FrmEntry.TxtItem.Text,
                 Integer.Parse(FrmEntry.MTxtMoney.Text),
                 FrmEntry.TxtRemarks.Text,
-                CreatedAt,
                 FileName)
 
             ' ファイルに書き込み
@@ -46,9 +48,7 @@ Public Class AccountBook
                 + FrmEntry.CmbCategory.Text + "," _
                 + FrmEntry.TxtItem.Text + "," _
                 + FrmEntry.MTxtMoney.Text + "," _
-                + FrmEntry.TxtRemarks.Text + "," _
-                + CreatedAt.ToString + "," _
-                + FileName)
+                + FrmEntry.TxtRemarks.Text)
         End If
 
 
@@ -82,8 +82,7 @@ Public Class AccountBook
         Dim DrRet As DialogResult = FrmEntry.ShowDialog()
 
         If DrRet = DialogResult.OK Then
-            Dim CreatedAt As DateTime = AccountDgv.Rows(NowRow).Cells(5).Value
-            Dim FileName As String = AccountDgv.Rows(NowRow).Cells(6).Value
+            Dim FileName As String = AccountDgv.Rows(NowRow).Cells(5).Value
 
             ' 表に反映
             AccountDgv.Rows(NowRow).Cells(0).Value =
@@ -99,9 +98,7 @@ Public Class AccountBook
                 + FrmEntry.CmbCategory.Text + "," _
                 + FrmEntry.TxtItem.Text + "," _
                 + FrmEntry.MTxtMoney.Text + "," _
-                + FrmEntry.TxtRemarks.Text + "," _
-                + CreatedAt.ToString + "," _
-                + FileName)
+                + FrmEntry.TxtRemarks.Text)
         End If
     End Sub
 #End Region
@@ -119,23 +116,37 @@ Public Class AccountBook
         ' 現在の行番号を取得
         Dim NowRow As Integer = AccountDgv.CurrentRow.Index
         ' 当該の行のファイル名を取得
-        Dim FileName As String = AccountDgv.Rows(NowRow).Cells(6).Value
+        Dim FileName As String = AccountDgv.Rows(NowRow).Cells(5).Value
 
         ' 表から削除
         AccountDgv.Rows.RemoveAt(NowRow)
         ' ファイルを削除
-        System.IO.File.Delete(SaveFilePath + "\Data\" + FileName)
+        DeleteFile(DataFileDir, FileName)
     End Sub
 #End Region
 
 #Region "保存"
+    ' データ保存
+    Private Sub SaveData(FileName As String, StrData As String)
+        WriteFile(DataFileDir, FileName, StrData)
+    End Sub
 
-    Sub SaveData(FileName As String, StrData As String)
+    ' カテゴリ保存
+    Public Sub SaveCategory(FileName As String, StrData As String)
+        WriteFile(CategoryFileDir, FileName, StrData)
+    End Sub
+
+    ' ファイル書き込み
+    Private Sub WriteFile(Dir As String, FileName As String, StrData As String)
         ' ファイルに書き込み
-        Dim sw As StreamWriter = New StreamWriter(SaveFilePath + DataFileDir + "\" + FileName, False, Encoding.UTF8)
+        Dim sw As StreamWriter = New StreamWriter(SaveFilePath + Dir + "\" + FileName, False, Encoding.UTF8)
         sw.WriteLine(StrData)
         sw.Close()
+    End Sub
 
+    ' ファイル削除
+    Public Sub DeleteFile(Dir As String, FileName As String)
+        File.Delete(SaveFilePath + Dir + "\" + FileName)
     End Sub
 
     ' 集計ツールボタン
@@ -144,6 +155,7 @@ Public Class AccountBook
         Process.Start("SpreadSheet.xlsm")
     End Sub
 
+    ' CSV出力
     Sub ExportData()
         Dim path As String = "MoneyData.csv"    '  出力ファイル名
         Dim StrData As String = ""              '  行分のデータ
@@ -172,16 +184,28 @@ Public Class AccountBook
 
     ' 再読込ボタン
     Private Sub BtnReload_Click(sender As Object, e As EventArgs) Handles BtnReload.Click
-        LoadBook()
+        Reload()
     End Sub
 
     ' 再読込メニュー
     Private Sub ReloadTsmi_Click(sender As Object, e As EventArgs) Handles ReloadTsmi.Click
-
+        Reload()
     End Sub
 
+    ' 自動で再読込
+    Private Sub ReloadTimer_Tick(sender As Object, e As EventArgs) Handles ReloadTimer.Tick
+        Reload()
+    End Sub
+
+    ' 再読込処理
+    Private Sub Reload()
+        LoadCategory()
+        LoadBook()
+    End Sub
+
+    ' 設定の読み出し
     Sub LoadSetting()
-        Dim path As String = "SavePath.ini"
+        Dim path As String = ConfFileName
         Dim FileExists As Boolean = File.Exists(path)
 
         If FileExists Then
@@ -189,40 +213,60 @@ Public Class AccountBook
                 path,
                 Encoding.Default)
             SaveFilePath = sr.ReadLine()
+            ReloadTimer.Enabled = Boolean.Parse(sr.ReadLine())
             sr.Close()
         Else
-            SaveFilePath = System.IO.Directory.GetCurrentDirectory()
+            SaveFilePath = SelectDataFolder(System.IO.Directory.GetCurrentDirectory())
+            SaveConfig()
         End If
     End Sub
 
+    ' データフォルダの選択
+    Public Function SelectDataFolder(path As String)
+        FbdPickDataFolder.Description = "データフォルダを選択してください。" & Chr(13) &
+            "選択しない場合は、プログラムフォルダの直下にデータフォルダが作成されます。"
+        FbdPickDataFolder.SelectedPath = path
+
+        'ダイアログを表示する
+        If FbdPickDataFolder.ShowDialog(Me) = DialogResult.OK Then
+            '選択されたフォルダのパスを返却
+            Return FbdPickDataFolder.SelectedPath
+        End If
+        Return path
+    End Function
+
     Sub LoadCategory()
-        Dim path As String = "CategoryData.csv"
         Dim DelimStr As String = ","
         Dim delimiter As Char() = DelimStr.ToArray()
         Dim StrData As String()
         Dim StrLine As String
-        Dim FileExists As Boolean = File.Exists(path)
+        Dim FileNames As String()
 
         CategoryDataSet1.Clear()
 
-        If FileExists Then
-            Dim sr As StreamReader = New StreamReader(
-                path,
-                Encoding.Default)
-            Do While sr.Peek() >= 0
-                StrLine = sr.ReadLine()
-                StrData = StrLine.Split(delimiter)
-                CategoryDataSet1.CategoryDataTable.AddCategoryDataTableRow(
+        ' カテゴリフォルダの中身をすべて読み込み
+        Try
+            FileNames = Directory.GetFiles(SaveFilePath + CategoryFileDir, "*.habc")
+        Catch ex As Exception
+            Directory.CreateDirectory(SaveFilePath + CategoryFileDir)
+            SaveCategory(CreateFilename() + ".habc", "給料" + "," + True.ToString)
+            SaveCategory(CreateFilename() + ".habc", "食費" + "," + False.ToString)
+            SaveCategory(CreateFilename() + ".habc", "雑費" + "," + False.ToString)
+            SaveCategory(CreateFilename() + ".habc", "住居" + "," + False.ToString)
+            FileNames = Directory.GetFiles(SaveFilePath + CategoryFileDir, "*.habc")
+        End Try
+
+        For Each file In FileNames
+            Dim sr As StreamReader = New StreamReader(file, Encoding.Default)
+
+            StrLine = sr.ReadLine()
+            StrData = StrLine.Split(delimiter)
+            CategoryDataSet1.CategoryDataTable.AddCategoryDataTableRow(
                     StrData(0),
-                    Boolean.Parse(StrData(1)))
-            Loop
+                    Boolean.Parse(StrData(1)),
+                    Path.GetFileName(file))
             sr.Close()
-        Else
-            CategoryDataSet1.CategoryDataTable.AddCategoryDataTableRow("給料", True)
-            CategoryDataSet1.CategoryDataTable.AddCategoryDataTableRow("食費", False)
-            CategoryDataSet1.CategoryDataTable.AddCategoryDataTableRow("雑費", False)
-            CategoryDataSet1.CategoryDataTable.AddCategoryDataTableRow("住居", False)
-        End If
+        Next
     End Sub
 
     Private Sub LoadBook()
@@ -252,7 +296,6 @@ Public Class AccountBook
                     StrData(2),
                     Integer.Parse(StrData(3)),
                     StrData(4),
-                    DateTime.Parse(StrData(5)),
                     Path.GetFileName(file))
             sr.Close()
         Next
@@ -261,41 +304,29 @@ Public Class AccountBook
 
 #Region "設定"
     Private Sub SettingTsmi_Click(sender As Object, e As EventArgs) Handles SettingTsmi.Click
-        Dim FrmSetting As SettingFm = New SettingFm(SaveFilePath, CategoryDataSet1)
+        Dim FrmSetting As SettingFm = New SettingFm(SaveFilePath, ReloadTimer.Enabled, CategoryDataSet1)
         Dim DrRet As DialogResult = FrmSetting.ShowDialog()
 
         If DrRet = DialogResult.OK Then
             ' 分類の再構築
             CategoryDataSet1.Clear()
             CategoryDataSet1.Merge(FrmSetting.CategoryDataSet)
-            SaveCategory()
 
-            ' ファイルパスの保存
+            ' ファイルパスとDropbox使用設定の保存
             SaveFilePath = FrmSetting.TxtSavePath.Text
-            SavePath()
+            ReloadTimer.Enabled = FrmSetting.CkbDropbox.Checked
+            SaveConfig()
         End If
     End Sub
-    Sub SaveCategory()
-        Dim path As String = "CategoryData.csv"    '  出力ファイル名
-        Dim StrData As String = ""              '  行分のデータ
-        Dim sw As StreamWriter = New StreamWriter(
-            path,
-            False,
-            Encoding.Default)
-        For Each DrCategory As CategoryDataSet.CategoryDataTableRow In CategoryDataSet1.CategoryDataTable
-            StrData = DrCategory.分類 + "," + DrCategory.収入.ToString
-            sw.WriteLine(StrData)
-        Next
-        sw.Close()
-    End Sub
 
-    Sub SavePath()
-        Dim path As String = "SavePath.ini"    '  出力ファイル名
+    Sub SaveConfig()
+        Dim path As String = ConfFileName    '  出力ファイル名
         Dim sw As StreamWriter = New StreamWriter(
             path,
             False,
             Encoding.UTF8)
         sw.WriteLine(SaveFilePath)
+        sw.WriteLine(ReloadTimer.Enabled.ToString)
         sw.Close()
     End Sub
 
@@ -320,9 +351,14 @@ Public Class AccountBook
 
             If DrRet = DialogResult.OK Then
                 name = FrmAddCategory.TxtCategoryName.Text
+                Dim FileName As String = CreateFilename() + ".habc"
                 CategoryDataSet1.CategoryDataTable.AddCategoryDataTableRow _
-                    (name, FrmAddCategory.RbnIncome.Checked)
-                SaveCategory()
+                    (name,
+                     FrmAddCategory.RbnIncome.Checked,
+                     FileName)
+                SaveCategory(FileName,
+                             name + "," _
+                             + FrmAddCategory.RbnIncome.Checked.ToString)
             End If
         End If
         Return name
@@ -330,12 +366,15 @@ Public Class AccountBook
 
 #End Region
 
-#Region "SHA1"
-    Private Function CreateFilename(CreatedAt As DateTime)
-        ' 作成日時からSHA1ハッシュ値を計算してファイル名にする
+#Region "ファイル名生成"
+
+
+    Public Function CreateFilename()
+        ' 乱数からからSHA1ハッシュ値を計算してファイル名にする
+
 
         ' 作成日時をbyte型配列に格納
-        Dim data As Byte() = System.Text.Encoding.UTF8.GetBytes(CreatedAt.ToString)
+        Dim data As Byte() = System.Text.Encoding.UTF8.GetBytes(Rnd().ToString)
         ' SHA256オブジェクトを作成
         Dim sha As System.Security.Cryptography.SHA1 = System.Security.Cryptography.SHA1.Create()
         ' ハッシュ値を計算

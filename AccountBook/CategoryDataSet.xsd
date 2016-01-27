@@ -12,11 +12,12 @@
   <xs:element name="CategoryDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="CategoryDataSet" msprop:Generator_UserDSName="CategoryDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="CategoryDataTable" msprop:Generator_TableClassName="CategoryDataTableDataTable" msprop:Generator_TableVarName="tableCategoryDataTable" msprop:Generator_TablePropName="CategoryDataTable" msprop:Generator_RowDeletingName="CategoryDataTableRowDeleting" msprop:Generator_RowChangingName="CategoryDataTableRowChanging" msprop:Generator_RowEvHandlerName="CategoryDataTableRowChangeEventHandler" msprop:Generator_RowDeletedName="CategoryDataTableRowDeleted" msprop:Generator_UserTableName="CategoryDataTable" msprop:Generator_RowChangedName="CategoryDataTableRowChanged" msprop:Generator_RowEvArgName="CategoryDataTableRowChangeEvent" msprop:Generator_RowClassName="CategoryDataTableRow">
+        <xs:element name="CategoryDataTable" msprop:Generator_TableClassName="CategoryDataTableDataTable" msprop:Generator_TableVarName="tableCategoryDataTable" msprop:Generator_RowChangedName="CategoryDataTableRowChanged" msprop:Generator_TablePropName="CategoryDataTable" msprop:Generator_RowDeletingName="CategoryDataTableRowDeleting" msprop:Generator_RowChangingName="CategoryDataTableRowChanging" msprop:Generator_RowEvHandlerName="CategoryDataTableRowChangeEventHandler" msprop:Generator_RowDeletedName="CategoryDataTableRowDeleted" msprop:Generator_RowClassName="CategoryDataTableRow" msprop:Generator_UserTableName="CategoryDataTable" msprop:Generator_RowEvArgName="CategoryDataTableRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="分類" msprop:Generator_ColumnVarNameInTable="column分類" msprop:Generator_ColumnPropNameInRow="分類" msprop:Generator_ColumnPropNameInTable="分類Column" msprop:Generator_UserColumnName="分類" type="xs:string" />
               <xs:element name="収入" msprop:Generator_ColumnVarNameInTable="column収入" msprop:Generator_ColumnPropNameInRow="収入" msprop:Generator_ColumnPropNameInTable="収入Column" msprop:Generator_UserColumnName="収入" type="xs:boolean" minOccurs="0" />
+              <xs:element name="FileName" msprop:Generator_ColumnVarNameInTable="columnFileName" msprop:Generator_ColumnPropNameInRow="FileName" msprop:Generator_ColumnPropNameInTable="FileNameColumn" msprop:Generator_UserColumnName="FileName" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

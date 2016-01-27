@@ -287,6 +287,8 @@ Partial Public Class CategoryDataSet
         
         Private column収入 As Global.System.Data.DataColumn
         
+        Private columnFileName As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
@@ -339,6 +341,14 @@ Partial Public Class CategoryDataSet
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property FileNameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnFileName
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -375,9 +385,9 @@ Partial Public Class CategoryDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddCategoryDataTableRow(ByVal 分類 As String, ByVal 収入 As Boolean) As CategoryDataTableRow
+        Public Overloads Function AddCategoryDataTableRow(ByVal 分類 As String, ByVal 収入 As Boolean, ByVal FileName As String) As CategoryDataTableRow
             Dim rowCategoryDataTableRow As CategoryDataTableRow = CType(Me.NewRow,CategoryDataTableRow)
-            Dim columnValuesArray() As Object = New Object() {分類, 収入}
+            Dim columnValuesArray() As Object = New Object() {分類, 収入, FileName}
             rowCategoryDataTableRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowCategoryDataTableRow)
             Return rowCategoryDataTableRow
@@ -402,6 +412,7 @@ Partial Public Class CategoryDataSet
         Friend Sub InitVars()
             Me.column分類 = MyBase.Columns("分類")
             Me.column収入 = MyBase.Columns("収入")
+            Me.columnFileName = MyBase.Columns("FileName")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -411,6 +422,8 @@ Partial Public Class CategoryDataSet
             MyBase.Columns.Add(Me.column分類)
             Me.column収入 = New Global.System.Data.DataColumn("収入", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.column収入)
+            Me.columnFileName = New Global.System.Data.DataColumn("FileName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnFileName)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.column分類}, false))
             Me.column分類.AllowDBNull = false
             Me.column分類.Unique = true
@@ -586,6 +599,21 @@ Partial Public Class CategoryDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property FileName() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCategoryDataTable.FileNameColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("テーブル 'CategoryDataTable' にある列 'FileName' の値は DBNull です。", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCategoryDataTable.FileNameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function Is収入Null() As Boolean
             Return Me.IsNull(Me.tableCategoryDataTable.収入Column)
         End Function
@@ -594,6 +622,18 @@ Partial Public Class CategoryDataSet
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub Set収入Null()
             Me(Me.tableCategoryDataTable.収入Column) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsFileNameNull() As Boolean
+            Return Me.IsNull(Me.tableCategoryDataTable.FileNameColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetFileNameNull()
+            Me(Me.tableCategoryDataTable.FileNameColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     
