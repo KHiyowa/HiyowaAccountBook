@@ -33,13 +33,13 @@ Partial Class SettingFm
         Me.BtnOK = New System.Windows.Forms.Button()
         Me.BtnCancel = New System.Windows.Forms.Button()
         Me.CategoryDgv = New System.Windows.Forms.DataGridView()
+        Me.分類DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.収入DataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.FileName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CategoryDataTableBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.CategoryDataSet = New AccountBook1.CategoryDataSet()
         Me.CkbDropbox = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.分類DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.収入DataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.FileName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.CategoryDgv, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CategoryDataTableBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.CategoryDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -96,6 +96,7 @@ Partial Class SettingFm
         Me.ChangeBtn.TabIndex = 8
         Me.ChangeBtn.Text = "変更(&C)"
         Me.ChangeBtn.UseVisualStyleBackColor = True
+        Me.ChangeBtn.Visible = False
         '
         'AddBtn
         '
@@ -141,6 +142,28 @@ Partial Class SettingFm
         Me.CategoryDgv.Size = New System.Drawing.Size(441, 218)
         Me.CategoryDgv.TabIndex = 11
         '
+        '分類DataGridViewTextBoxColumn
+        '
+        Me.分類DataGridViewTextBoxColumn.DataPropertyName = "分類"
+        Me.分類DataGridViewTextBoxColumn.HeaderText = "分類"
+        Me.分類DataGridViewTextBoxColumn.Name = "分類DataGridViewTextBoxColumn"
+        Me.分類DataGridViewTextBoxColumn.ReadOnly = True
+        '
+        '収入DataGridViewCheckBoxColumn
+        '
+        Me.収入DataGridViewCheckBoxColumn.DataPropertyName = "収入"
+        Me.収入DataGridViewCheckBoxColumn.HeaderText = "収入"
+        Me.収入DataGridViewCheckBoxColumn.Name = "収入DataGridViewCheckBoxColumn"
+        Me.収入DataGridViewCheckBoxColumn.ReadOnly = True
+        '
+        'FileName
+        '
+        Me.FileName.DataPropertyName = "FileName"
+        Me.FileName.HeaderText = "FileName"
+        Me.FileName.Name = "FileName"
+        Me.FileName.ReadOnly = True
+        Me.FileName.Visible = False
+        '
         'CategoryDataTableBindingSource
         '
         Me.CategoryDataTableBindingSource.DataMember = "CategoryDataTable"
@@ -169,28 +192,6 @@ Partial Class SettingFm
         Me.Label1.Size = New System.Drawing.Size(222, 12)
         Me.Label1.TabIndex = 13
         Me.Label1.Text = "チェックすると、定期的に自動で再読込します。"
-        '
-        '分類DataGridViewTextBoxColumn
-        '
-        Me.分類DataGridViewTextBoxColumn.DataPropertyName = "分類"
-        Me.分類DataGridViewTextBoxColumn.HeaderText = "分類"
-        Me.分類DataGridViewTextBoxColumn.Name = "分類DataGridViewTextBoxColumn"
-        Me.分類DataGridViewTextBoxColumn.ReadOnly = True
-        '
-        '収入DataGridViewCheckBoxColumn
-        '
-        Me.収入DataGridViewCheckBoxColumn.DataPropertyName = "収入"
-        Me.収入DataGridViewCheckBoxColumn.HeaderText = "収入"
-        Me.収入DataGridViewCheckBoxColumn.Name = "収入DataGridViewCheckBoxColumn"
-        Me.収入DataGridViewCheckBoxColumn.ReadOnly = True
-        '
-        'FileName
-        '
-        Me.FileName.DataPropertyName = "FileName"
-        Me.FileName.HeaderText = "FileName"
-        Me.FileName.Name = "FileName"
-        Me.FileName.ReadOnly = True
-        Me.FileName.Visible = False
         '
         'SettingFm
         '
